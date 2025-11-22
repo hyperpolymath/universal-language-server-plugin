@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Language Connector - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 Universal Language Connector</h1>
+            <p class="tagline">Convert documents across formats in real-time</p>
+            <div class="status">
+                <span id="connection-status" class="status-badge disconnected">Disconnected</span>
+                <span id="server-version">v0.1.0</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Live Converter Section -->
+            <section class="card converter-section">
+                <h2>📝 Live Converter</h2>
+                <div class="converter-grid">
+                    <div class="converter-input">
+                        <label for="input-format">From:</label>
+                        <select id="input-format">
+                            <option value="markdown">Markdown</option>
+                            <option value="html">HTML</option>
+                            <option value="json">JSON</option>
+                        </select>
+                        <textarea id="input-content" placeholder="Enter your content here..." rows="15"></textarea>
+                    </div>
+                    <div class="converter-output">
+                        <label for="output-format">To:</label>
+                        <select id="output-format">
+                            <option value="html">HTML</option>
+                            <option value="markdown">Markdown</option>
+                            <option value="json">JSON</option>
+                        </select>
+                        <textarea id="output-content" placeholder="Converted content will appear here..." rows="15" readonly></textarea>
+                    </div>
+                </div>
+                <div class="converter-actions">
+                    <button id="convert-btn" class="btn btn-primary">Convert</button>
+                    <button id="clear-btn" class="btn btn-secondary">Clear</button>
+                    <div id="conversion-warnings" class="warnings"></div>
+                </div>
+            </section>
+
+            <!-- Document Manager Section -->
+            <section class="card">
+                <h2>📚 Document Manager</h2>
+                <div class="document-stats">
+                    <div class="stat-card">
+                        <span class="stat-value" id="total-docs">0</span>
+                        <span class="stat-label">Total Documents</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="active-connections">0</span>
+                        <span class="stat-label">Active Connections</span>
+                    </div>
+                </div>
+                <div class="document-list">
+                    <table id="documents-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>URI</th>
+                                <th>Format</th>
+                                <th>Version</th>
+                                <th>Modified</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="documents-tbody">
+                            <tr>
+                                <td colspan="6" class="empty-state">No documents available</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id="refresh-docs-btn" class="btn btn-secondary">Refresh Documents</button>
+            </section>
+
+            <!-- Real-time Updates Section -->
+            <section class="card">
+                <h2>🔴 Live Updates</h2>
+                <div class="updates-toggle">
+                    <label>
+                        <input type="checkbox" id="enable-websocket">
+                        Enable real-time updates (WebSocket)
+                    </label>
+                </div>
+                <div id="live-updates" class="updates-log">
+                    <p class="empty-state">Enable real-time updates to see document changes live</p>
+                </div>
+            </section>
+
+            <!-- Server Statistics -->
+            <section class="card">
+                <h2>📊 Server Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-key">Server Version:</span>
+                        <span class="stat-value" id="stat-version">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-key">Document Count:</span>
+                        <span class="stat-value" id="stat-doc-count">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-key">Uptime:</span>
+                        <span class="stat-value" id="stat-uptime">-</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Universal Language Connector • Powered by LSP • <a href="https://github.com/universal-connector" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

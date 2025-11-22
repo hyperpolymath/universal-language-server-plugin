@@ -1,0 +1,60 @@
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# Node.js / VS Code client
+node_modules/
+dist/
+out/
+*.vsix
+package-lock.json
+
+# Python / Sublime
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+*.exe
+*.dll
+*.dylib
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+*.local
+
+# Coverage
+coverage/
+*.profdata
+tarpaulin-report.html
+
+# Benchmarks
+criterion/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Docker
+.dockerignore
+
+# OS
+Thumbs.db

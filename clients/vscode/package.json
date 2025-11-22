@@ -1,0 +1,63 @@
+{
+  "name": "universal-connector",
+  "displayName": "Universal Language Connector",
+  "description": "Universal document conversion via LSP",
+  "version": "0.1.0",
+  "publisher": "universal-connector",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onLanguage:html",
+    "onLanguage:json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "universalConnector.convertToHtml",
+        "title": "Convert to HTML",
+        "category": "Universal Connector"
+      },
+      {
+        "command": "universalConnector.convertToMarkdown",
+        "title": "Convert to Markdown",
+        "category": "Universal Connector"
+      },
+      {
+        "command": "universalConnector.convertToJson",
+        "title": "Convert to JSON",
+        "category": "Universal Connector"
+      }
+    ],
+    "configuration": {
+      "title": "Universal Language Connector",
+      "properties": {
+        "universalConnector.serverPath": {
+          "type": "string",
+          "default": "universal-connector-server",
+          "description": "Path to the Universal Connector server executable"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  }
+}

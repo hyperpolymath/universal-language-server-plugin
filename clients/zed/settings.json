@@ -1,0 +1,21 @@
+{
+  "lsp": {
+    "universal-connector": {
+      "command": "universal-connector-server",
+      "args": [],
+      "languages": ["Markdown", "HTML", "JSON"],
+      "settings": {}
+    }
+  },
+  "languages": {
+    "Markdown": {
+      "language_servers": ["universal-connector"]
+    },
+    "HTML": {
+      "language_servers": ["universal-connector"]
+    },
+    "JSON": {
+      "language_servers": ["universal-connector"]
+    }
+  }
+}

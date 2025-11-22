@@ -1,0 +1,17 @@
+# Universal Language Connector - Helix Configuration
+
+[[language]]
+name = "markdown"
+language-servers = ["universal-connector"]
+
+[[language]]
+name = "html"
+language-servers = ["universal-connector"]
+
+[[language]]
+name = "json"
+language-servers = ["universal-connector"]
+
+[language-server.universal-connector]
+command = "universal-connector-server"
+args = []

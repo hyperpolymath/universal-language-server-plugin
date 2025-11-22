@@ -1,0 +1,41 @@
+{
+  "title": "Example JSON Document",
+  "content": "This is an example JSON document for testing the Universal Language Connector.",
+  "features": [
+    "LSP Server",
+    "HTTP API",
+    "WebSocket Support",
+    "Multi-editor integration"
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "author": "Universal Connector Contributors",
+    "license": "MIT"
+  },
+  "stats": {
+    "clients": 7,
+    "formats": 3,
+    "performance": {
+      "response_time_ms": 95,
+      "memory_mb": 48,
+      "startup_ms": 450
+    }
+  },
+  "supported_conversions": [
+    {
+      "from": "markdown",
+      "to": "html",
+      "quality": "high"
+    },
+    {
+      "from": "html",
+      "to": "markdown",
+      "quality": "good"
+    },
+    {
+      "from": "json",
+      "to": "markdown",
+      "quality": "high"
+    }
+  ]
+}

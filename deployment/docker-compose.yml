@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  universal-connector:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    container_name: universal-connector-server
+    ports:
+      - "8080:8080"  # HTTP API
+      - "8081:8081"  # WebSocket
+    environment:
+      - RUST_LOG=info
+      - HTTP_ADDR=0.0.0.0:8080
+      - WS_ADDR=0.0.0.0:8081
+      - ENABLE_LSP=false
+      - ENABLE_HTTP=true
+      - ENABLE_WS=true
+    volumes:
+      - connector-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - connector-network
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: universal-connector-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../web:/usr/share/nginx/html:ro
+    depends_on:
+      - universal-connector
+    restart: unless-stopped
+    networks:
+      - connector-network
+
+volumes:
+  connector-data:
+    driver: local
+
+networks:
+  connector-network:
+    driver: bridge
