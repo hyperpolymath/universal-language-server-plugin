@@ -1,0 +1,25 @@
+# RFC 9116 Security Contact Information
+# https://securitytxt.org/
+
+Contact: mailto:security@universal-connector.org
+Expires: 2026-11-22T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://universal-connector.org/.well-known/security.txt
+
+# Policy
+Policy: https://github.com/universal-connector/universal-language-connector/blob/main/SECURITY.md
+
+# Acknowledgments
+Acknowledgments: https://github.com/universal-connector/universal-language-connector/blob/main/SECURITY.md#acknowledgments
+
+# Security Scope
+# In-scope: LSP server, HTTP API, WebSocket server, conversion engine
+# Out-of-scope: Editor client vulnerabilities (responsibility of editor maintainers)
+
+# Coordinated Disclosure
+# We follow a 90-day coordinated disclosure policy
+# Response time: 48 hours for initial acknowledgment
+
+# Encryption
+# PGP Key: [To be added]
+# Hiring: https://universal-connector.org/jobs

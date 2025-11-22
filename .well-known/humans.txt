@@ -1,0 +1,148 @@
+# humanstxt.org - Humans behind Universal Language Connector
+
+/* TEAM */
+
+Project Creator & Lead: [Your Name]
+Contact: [your-email]
+Twitter: @[handle]
+Location: [Location]
+
+Contributors: See https://github.com/universal-connector/universal-language-connector/graphs/contributors
+
+/* THANKS */
+
+Inspiration:
+  - LSP Community - Microsoft, et al.
+  - Rust Community - Mozilla, Rust Foundation
+  - Editor Communities - VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, Helix
+
+Open Source Projects:
+  - tower-lsp - LSP framework by Eyal Kalderon
+  - axum - HTTP framework by Tokio team
+  - pulldown-cmark - Markdown parser by Raph Levien
+  - scraper - HTML parsing by Carey Metcalfe
+  - dashmap - Concurrent HashMap by Acrimon
+
+Standards:
+  - LSP 3.17 - Language Server Protocol specification
+  - RFC 9116 - Security.txt standard
+  - Keep a Changelog - Changelog format
+  - Semantic Versioning - Version numbering
+  - humanstxt.org - This file format
+
+RSR Framework:
+  - Rhodium Standard Repository compliance
+  - TPCF - Tri-Perimeter Contribution Framework
+  - CCCP Manifesto - Caring, Consent, Compensation, Publicity
+  - Palimpsest License - Emotional labor acknowledgment
+
+/* SITE */
+
+Language: English (en-US)
+Doctype: Markdown, Rust, TypeScript, Lua, Emacs Lisp, Kotlin, Python
+IDE: VS Code, Neovim, Emacs, IntelliJ IDEA, Sublime Text, Zed, Helix
+Components: Rust server, 7 editor clients, Web UI, HTTP API, WebSocket
+Standards: LSP 3.17, HTTP/1.1, WebSocket RFC 6455, OpenAPI 3.0
+
+Build Tools:
+  - Rust - cargo 1.75+
+  - Node.js - npm 18+
+  - Make - GNU Make
+  - Just - justfile build automation
+  - Nix - flake.nix reproducible builds
+  - Docker/Podman - Container deployment
+
+/* ARCHITECTURE */
+
+Paradigm: "Write once, run everywhere" via LSP
+Core Principle: All logic in server, clients are thin wrappers (<100 LOC)
+Performance: <100ms response, <50MB memory, <500ms startup
+Type Safety: Rust compile-time guarantees + ownership model
+Memory Safety: Zero unsafe blocks, borrow checker enforced
+Offline-First: Works air-gapped, no required network dependencies
+
+/* LICENSES */
+
+Code: Dual-licensed MIT + Palimpsest v0.8
+Documentation: CC-BY-SA 4.0
+Examples: CC0 1.0 (Public Domain)
+
+MIT License permits:
+  - Commercial use
+  - Modification
+  - Distribution
+  - Private use
+
+Palimpsest License adds:
+  - Emotional labor acknowledgment
+  - Contributor well-being consideration
+  - Reversibility encouragement
+  - Attribution requirements
+
+/* PROJECT STATS */
+
+Repository: https://github.com/universal-connector/universal-language-connector
+Lines of Code: ~5,890+ (as of v0.1.0)
+Languages:
+  - Rust: 1,500+ LOC (server)
+  - TypeScript: ~70 LOC (VS Code client)
+  - Lua: ~65 LOC (Neovim client)
+  - Emacs Lisp: ~75 LOC (Emacs client)
+  - Kotlin: ~55 LOC (JetBrains client)
+  - Python: ~60 LOC (Sublime client)
+  - JavaScript: ~500 LOC (Web UI)
+  - HTML/CSS: ~1,000 LOC (Web UI)
+  - Markdown: ~2,500+ LOC (Documentation)
+
+Files: 36+
+Editors Supported: 7 (VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, Helix)
+Formats: 3 (Markdown, HTML, JSON) + extensible
+
+/* DEVELOPMENT */
+
+Started: 2025-11-22
+Status: Active development
+Version: 0.1.0
+Release Cycle: Semantic versioning
+CI/CD: GitLab CI
+Testing: 80%+ coverage target
+Documentation: Comprehensive (README, API, CONTRIBUTING, SECURITY)
+
+/* CONTACT */
+
+Website: https://universal-connector.org
+GitHub: https://github.com/universal-connector/universal-language-connector
+Issues: https://github.com/universal-connector/universal-language-connector/issues
+Discussions: https://github.com/universal-connector/universal-language-connector/discussions
+Email: contact@universal-connector.org
+Security: security@universal-connector.org
+
+/* COMMUNITY */
+
+Code of Conduct: Yes (Contributor Covenant 2.1 + Emotional Safety)
+Contributing Guide: Yes (CONTRIBUTING.md)
+Governance: TPCF Perimeter 3 (Community Sandbox - Open)
+Chat: [Discord/Slack/Matrix - TBD]
+Forum: [Discourse/Discussions - TBD]
+
+/* SUSTAINABILITY */
+
+Funding: [Open Collective / GitHub Sponsors - TBD]
+Sponsors: [To be added]
+Corporate Support: [To be added]
+Bounties: [To be added]
+
+/* CERTIFICATION */
+
+RSR Compliance: Bronze level (targeting Silver)
+LSP Compliance: 3.17 compliant
+Security: Memory-safe (Rust), no unsafe blocks
+Accessibility: WCAG 2.1 AA (Web UI)
+I18n: English (more languages planned)
+
+/* META */
+
+Last Updated: 2025-11-22
+Version: 1.0
+Format: humanstxt.org
+Encoding: UTF-8

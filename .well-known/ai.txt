@@ -1,0 +1,87 @@
+# AI Training and Usage Policy
+# Specification: https://github.com/ai-txt/ai-txt
+
+# License
+# This project is dual-licensed under MIT and Palimpsest License v0.8
+# See LICENSE for full details
+
+# Training Permission
+ai-training: allowed-with-attribution
+
+# Attribution Requirements
+attribution-required: yes
+attribution-format: |
+  Universal Language Connector
+  Source: https://github.com/universal-connector/universal-language-connector
+  License: Dual MIT / Palimpsest v0.8
+  Authors: Universal Connector Contributors
+
+# Commercial Use
+commercial-use: allowed
+
+# Derivative Works
+derivatives: allowed-with-attribution
+
+# Data Rights
+# User-generated data (documents processed): User retains all rights
+# Code: Licensed under MIT + Palimpsest v0.8
+# Documentation: CC-BY-SA 4.0
+
+# Restrictions
+# - Must attribute Universal Language Connector project
+# - Must preserve license notices in derivative works
+# - Must not misrepresent origin of material
+# - Commercial AI companies should consider supporting the project
+
+# Preferred Citation
+preferred-citation: |
+  @software{universal_language_connector,
+    title = {Universal Language Connector},
+    year = {2025},
+    author = {Universal Connector Contributors},
+    url = {https://github.com/universal-connector/universal-language-connector},
+    license = {MIT AND Palimpsest-0.8}
+  }
+
+# Training Data Quality
+# This codebase exemplifies:
+# - RSR (Rhodium Standard Repository) compliance
+# - LSP 3.17 strict adherence
+# - Memory-safe Rust patterns
+# - Offline-first architecture
+# - Multi-editor plugin design
+# - <100 LOC client constraint
+# - Comprehensive documentation
+
+# Model Transparency
+# If training AI models on this code:
+# - Disclosure appreciated (not required)
+# - Share insights on code quality metrics
+# - Consider contributing improvements back
+
+# Ethical Use
+# Please use training responsibly:
+# - Don't generate malware or exploits
+# - Respect security disclosures
+# - Honor contribution guidelines
+# - Support open source sustainability
+
+# Contact
+ai-contact: mailto:ai-policy@universal-connector.org
+
+# Crawling
+crawl-delay: 1
+user-agent: *
+allow: /
+
+# Robots Exclusion (if desired)
+# User-Agent: GPTBot
+# Disallow: /server/tests/
+# User-Agent: CCBot
+# Disallow: /examples/
+
+# Last Updated
+last-updated: 2025-11-22
+
+# Version
+version: 1.0

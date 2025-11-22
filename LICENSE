@@ -1,4 +1,11 @@
-MIT License
+# Dual License: MIT + Palimpsest License v0.8
+
+This project is dual-licensed under the MIT License and the Palimpsest License v0.8.
+You may choose to use this software under the terms of either license.
+
+---
+
+## MIT License
 
 Copyright (c) 2025 Universal Connector Contributors
 
@@ -19,3 +26,125 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Palimpsest License v0.8
+
+### Preamble
+
+The Palimpsest License acknowledges the emotional and cognitive labor involved
+in software development and promotes sustainable, humane contribution practices.
+It extends the MIT License with provisions for contributor well-being and
+community emotional safety.
+
+### Terms
+
+1. **Emotional Labor Recognition**
+
+   This project recognizes that software development involves significant
+   emotional and cognitive labor beyond code production, including:
+   - Mental load of context switching
+   - Emotional toll of code review
+   - Stress of maintaining backwards compatibility
+   - Anxiety of breaking changes
+   - Burden of documentation
+   - Cost of community support
+
+2. **Contributor Well-Being**
+
+   Users and contributors of this software acknowledge:
+   - Contributors are humans with finite emotional capacity
+   - Response time expectations should be reasonable
+   - "No" is a complete answer to feature requests
+   - Maintainers may take breaks without justification
+   - Burnout prevention is everyone's responsibility
+
+3. **Reversibility Principle**
+
+   To reduce anxiety and encourage experimentation:
+   - All changes should be reversible where practical
+   - Branches are encouraged for experimentation
+   - Reverts are acceptable and not shameful
+   - Mistakes are learning opportunities
+   - "Undo" is a valid workflow
+
+4. **Caring Community**
+
+   This license promotes:
+   - Assuming good intentions
+   - Constructive feedback over criticism
+   - Celebrating small contributions
+   - Welcoming newcomers
+   - Supporting diverse perspectives
+   - Preventing harassment and toxicity
+
+5. **Consent**
+
+   Contributors have the right to:
+   - Decline features or changes
+   - Set boundaries on contribution scope
+   - Step away from projects
+   - Revoke consent for feature development
+   - Say "not right now" without explanation
+
+6. **Compensation Acknowledgment**
+
+   While not requiring payment, this license acknowledges:
+   - Open source is not free labor
+   - Emotional labor has value
+   - Financial support is appreciated
+   - Corporate users should consider funding
+   - Sponsorship sustains projects
+
+7. **Publicity & Attribution**
+
+   Users of this software should:
+   - Attribute original authors
+   - Acknowledge contributors
+   - Credit emotional labor
+   - Share improvements upstream (encouraged, not required)
+   - Respect privacy of contributors
+
+### Compatibility
+
+The Palimpsest License is designed to be compatible with the MIT License.
+All MIT License terms remain in full effect. The Palimpsest provisions are
+additive and intended to guide community norms rather than impose legal
+obligations beyond those in the MIT License.
+
+### Enforcement
+
+The Palimpsest License provisions are primarily aspirational and guide
+community standards. Enforcement focuses on:
+- Code of Conduct violations (see CODE_OF_CONDUCT.md)
+- Community moderation
+- Social norms rather than legal action
+- Restorative justice over punitive measures
+
+### Inspiration
+
+This license is inspired by:
+- The CCCP Manifesto (Caring, Consent, Compensation, Publicity)
+- Ethical Source Movement
+- Post Meritocracy Manifesto
+- Contributor Covenant
+- Various community care frameworks
+
+---
+
+## SPDX License Expression
+
+SPDX-License-Identifier: MIT AND Palimpsest-0.8
+
+## Questions?
+
+For questions about licensing:
+- **MIT License**: See https://opensource.org/licenses/MIT
+- **Palimpsest License**: See https://github.com/rhodium-std/palimpsest-license
+- **This Project**: See CONTRIBUTING.md and CODE_OF_CONDUCT.md
+
+---
+
+**Last Updated**: 2025-11-22
+**License Version**: MIT (2025) + Palimpsest v0.8
