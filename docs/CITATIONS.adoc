@@ -1,0 +1,36 @@
+= universal-language-server-plugin - Citation Guide
+:toc:
+
+== BibTeX
+
+[source,bibtex]
+----
+@software{universal-language-server-plugin_2025,
+  author = {Polymath, Hyper},
+  title = {universal-language-server-plugin},
+  year = {2025},
+  url = {https://github.com/hyperpolymath/universal-language-server-plugin},
+  license = {AGPL-3.0-or-later}
+}
+----
+
+== Harvard Style
+
+Polymath, H. (2025) _universal-language-server-plugin_ [Computer software]. Available at: https://github.com/hyperpolymath/universal-language-server-plugin
+
+== OSCOLA
+
+Hyper Polymath, 'universal-language-server-plugin' (2025) <https://github.com/hyperpolymath/universal-language-server-plugin>
+
+== MLA
+
+Polymath, Hyper. "universal-language-server-plugin." 2025, github.com/hyperpolymath/universal-language-server-plugin.
+
+== APA 7
+
+Polymath, H. (2025). _universal-language-server-plugin_ [Computer software]. GitHub. https://github.com/hyperpolymath/universal-language-server-plugin
+
+== See Also
+
+* link:../CITATION.cff[CITATION.cff]
+* link:../codemeta.json[codemeta.json]

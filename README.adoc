@@ -1,6 +1,6 @@
-# Universal Language Connector
+= Universal Language Connector
 
-> **One server. All editors. Universal document conversion.**
+> *One server. All editors. Universal document conversion.*
 
 LSP-based universal plugin architecture enabling seamless document conversion across all major editors through a single, powerful Rust server.
 
@@ -8,47 +8,47 @@ LSP-based universal plugin architecture enabling seamless document conversion ac
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange.svg)](https://www.rust-lang.org/)
 [![LSP 3.17](https://img.shields.io/badge/LSP-3.17-green.svg)](https://microsoft.github.io/language-server-protocol/)
 
-## Features
+== Features
 
-🚀 **Universal Editor Support** - One server powers plugins for VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, and Helix
+🚀 *Universal Editor Support* - One server powers plugins for VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, and Helix
 
-⚡ **High Performance** - Sub-100ms responses, <50MB memory, <500ms startup
+⚡ *High Performance* - Sub-100ms responses, <50MB memory, <500ms startup
 
-🔄 **Smart Conversion** - Bidirectional document conversion (Markdown ↔ HTML ↔ JSON)
+🔄 *Smart Conversion* - Bidirectional document conversion (Markdown ↔ HTML ↔ JSON)
 
-🌐 **Web Dashboard** - Real-time document management and live conversion UI
+🌐 *Web Dashboard* - Real-time document management and live conversion UI
 
-📡 **Real-time Updates** - WebSocket support for collaborative workflows
+📡 *Real-time Updates* - WebSocket support for collaborative workflows
 
-🎯 **LSP Compliant** - Strict adherence to Language Server Protocol 3.17
+🎯 *LSP Compliant* - Strict adherence to Language Server Protocol 3.17
 
-## Quick Start
+== Quick Start
 
-### Installation
+=== Installation
 
-#### From Source (Recommended)
+==== From Source (Recommended)
 
 ```bash
-# Clone repository
+= Clone repository
 git clone https://github.com/universal-connector/universal-language-connector.git
 cd universal-language-connector
 
-# Build and install server
+= Build and install server
 make install
 
-# Verify installation
+= Verify installation
 universal-connector-server --version
 ```
 
-#### Using Docker
+==== Using Docker
 
 ```bash
 docker run -p 8080:8080 -p 8081:8081 universal-connector:latest
 ```
 
-### Editor Setup
+=== Editor Setup
 
-#### VS Code
+==== VS Code
 
 ```bash
 cd clients/vscode
@@ -57,7 +57,7 @@ npm run compile
 code --install-extension .
 ```
 
-#### Neovim
+==== Neovim
 
 Add to your config:
 
@@ -65,7 +65,7 @@ Add to your config:
 require('universal-connector').setup()
 ```
 
-#### Emacs
+==== Emacs
 
 ```elisp
 (use-package universal-connector
@@ -75,26 +75,26 @@ require('universal-connector').setup()
 
 See [Client Documentation](docs/CLIENT_DEVELOPMENT.md) for all editors.
 
-## Usage
+== Usage
 
-### LSP Integration (Editors)
+=== LSP Integration (Editors)
 
 Once configured, the connector provides:
 
-- **Format-aware completions** - Suggest conversions based on document type
-- **Hover documentation** - Show document statistics and format info
-- **Execute commands** - Convert documents with keyboard shortcuts
-- **Real-time diagnostics** - Validate document format
+- *Format-aware completions* - Suggest conversions based on document type
+- *Hover documentation* - Show document statistics and format info
+- *Execute commands* - Convert documents with keyboard shortcuts
+- *Real-time diagnostics* - Validate document format
 
-**Commands:**
+*Commands:*
 - `convert.toHtml` - Convert to HTML
 - `convert.toMarkdown` - Convert to Markdown
 - `convert.toJson` - Convert to JSON
 
-### HTTP API
+=== HTTP API
 
 ```bash
-# Convert document
+= Convert document
 curl -X POST http://localhost:8080/api/convert \
   -H "Content-Type: application/json" \
   -d '{
@@ -103,16 +103,16 @@ curl -X POST http://localhost:8080/api/convert \
     "to": "html"
   }'
 
-# List documents
+= List documents
 curl http://localhost:8080/api/documents
 
-# Server statistics
+= Server statistics
 curl http://localhost:8080/api/stats
 ```
 
 See [API Documentation](docs/API.md) for complete reference.
 
-### Web UI
+=== Web UI
 
 Open `http://localhost:8080` in your browser for:
 
@@ -121,7 +121,7 @@ Open `http://localhost:8080` in your browser for:
 - Real-time WebSocket updates
 - Server statistics dashboard
 
-## Architecture
+== Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -145,16 +145,16 @@ Open `http://localhost:8080` in your browser for:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Why This Works
+=== Why This Works
 
 The "universal" approach succeeds because:
 
-1. **LSP abstracts editor differences** - Single protocol for all editors
-2. **Stdio is universal** - Every editor can spawn processes
-3. **Server holds state** - Clients remain stateless and simple
-4. **Battle-tested protocol** - LSP 3.17 is proven and robust
+1. *LSP abstracts editor differences* - Single protocol for all editors
+2. *Stdio is universal* - Every editor can spawn processes
+3. *Server holds state* - Clients remain stateless and simple
+4. *Battle-tested protocol* - LSP 3.17 is proven and robust
 
-## Supported Conversions
+== Supported Conversions
 
 | From     | To       | Quality | Notes                           |
 |----------|----------|---------|---------------------------------|
@@ -165,31 +165,31 @@ The "universal" approach succeeds because:
 | JSON     | Markdown | ✅ High | Key-value representation        |
 | JSON     | HTML     | ✅ High | Via Markdown intermediary       |
 
-## Development
+== Development
 
-### Prerequisites
+=== Prerequisites
 
 - Rust 1.75+
 - Node.js 18+ (for VS Code client)
 - Docker/Podman (optional)
 
-### Build
+=== Build
 
 ```bash
-# Debug build
+= Debug build
 make build
 
-# Release build
+= Release build
 make release
 
-# Run tests
+= Run tests
 make test
 
-# Start development server
+= Start development server
 make dev
 ```
 
-### Project Structure
+=== Project Structure
 
 ```
 universal-language-server-plugin/
@@ -208,7 +208,7 @@ universal-language-server-plugin/
 └── examples/        # Usage examples
 ```
 
-### Contributing
+=== Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
@@ -217,7 +217,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 - Submission process
 - Architecture details
 
-## Performance
+== Performance
 
 Benchmarks on AMD Ryzen 7 5800X:
 
@@ -230,32 +230,32 @@ Benchmarks on AMD Ryzen 7 5800X:
 | HTTP API call      | 3.8ms    | +1MB     |
 | 100 concurrent     | 95ms     | 48MB     |
 
-**Targets:**
+*Targets:*
 - Response time: <100ms ✅
 - Memory usage: <50MB ✅
 - Startup time: <500ms ✅
 
-## Configuration
+== Configuration
 
-### Server
+=== Server
 
 Set via environment variables:
 
 ```bash
-# Server addresses
+= Server addresses
 export HTTP_ADDR="0.0.0.0:8080"
 export WS_ADDR="0.0.0.0:8081"
 
-# Enable/disable components
+= Enable/disable components
 export ENABLE_LSP="true"
 export ENABLE_HTTP="true"
 export ENABLE_WS="true"
 
-# Logging
+= Logging
 export RUST_LOG="info"
 ```
 
-### Clients
+=== Clients
 
 Each client has specific configuration. See client README:
 
@@ -265,36 +265,36 @@ Each client has specific configuration. See client README:
 - [JetBrains](clients/jetbrains/README.md)
 - [Sublime](clients/sublime/README.md)
 
-## Deployment
+== Deployment
 
-### Docker
+=== Docker
 
 ```bash
-# Build image
+= Build image
 make docker-build
 
-# Run container
+= Run container
 make docker-run
 
-# Or use docker-compose
+= Or use docker-compose
 cd deployment
 docker-compose up -d
 ```
 
-### Standalone Binary
+=== Standalone Binary
 
 ```bash
-# Build optimized binary
+= Build optimized binary
 make production
 
-# Copy to system
+= Copy to system
 sudo cp server/target/release/universal-connector-server /usr/local/bin/
 
-# Run
+= Run
 universal-connector-server
 ```
 
-### systemd Service
+=== systemd Service
 
 ```ini
 [Unit]
@@ -311,7 +311,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-## Documentation
+== Documentation
 
 - [API Reference](docs/API.md) - Complete API documentation
 - [Architecture](docs/ARCHITECTURE.md) - Deep dive into design
@@ -319,7 +319,7 @@ WantedBy=multi-user.target
 - [LSP Compliance](docs/LSP_COMPLIANCE.md) - LSP implementation details
 - [Contributing](CONTRIBUTING.md) - Development guide
 
-## Roadmap
+== Roadmap
 
 - [x] Core LSP server implementation
 - [x] 7 editor clients (VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, Helix)
@@ -333,35 +333,35 @@ WantedBy=multi-user.target
 - [ ] Performance optimizations
 - [ ] Official LSP compliance testing
 
-## FAQ
+== FAQ
 
-**Q: Why another document converter?**
+*Q: Why another document converter?*
 A: Universal Language Connector is the only converter that integrates natively with all major editors through LSP, providing a consistent experience everywhere.
 
-**Q: Why Rust?**
+*Q: Why Rust?*
 A: Rust provides memory safety, fearless concurrency, and exceptional performance - perfect for a language server that needs to be fast and reliable.
 
-**Q: How does the 100 LOC client constraint work?**
+*Q: How does the 100 LOC client constraint work?*
 A: By delegating ALL logic to the server, clients only need to initialize the LSP connection and register commands - typically 50-70 lines of code.
 
-**Q: Can I add my own conversion formats?**
+*Q: Can I add my own conversion formats?*
 A: Yes! See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on adding custom converters.
 
-**Q: Is this production-ready?**
+*Q: Is this production-ready?*
 A: The core implementation is complete and tested. Additional hardening, security audits, and real-world testing are needed for production deployment.
 
-## License
+== License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
-## Acknowledgments
+== Acknowledgments
 
 - [tower-lsp](https://github.com/ebkalderon/tower-lsp) - LSP framework
 - [axum](https://github.com/tokio-rs/axum) - HTTP framework
 - [pulldown-cmark](https://github.com/raphlinus/pulldown-cmark) - Markdown parser
 - All the editor communities for excellent LSP support
 
-## Citation
+== Citation
 
 If you use Universal Language Connector in your research or project, please cite:
 
@@ -376,4 +376,4 @@ If you use Universal Language Connector in your research or project, please cite
 
 ---
 
-**Built with ❤️ using Rust and LSP**
+*Built with ❤️ using Rust and LSP*

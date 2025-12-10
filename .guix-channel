@@ -1,0 +1,7 @@
+;; universal-language-server-plugin - Guix Channel
+;; Add to ~/.config/guix/channels.scm
+
+(channel
+ (version 0)
+ (url "https://github.com/hyperpolymath/universal-language-server-plugin")
+ (branch "main"))
