@@ -1,379 +1,76 @@
-= Universal Language Connector
+= universal-language-server-plugin
+Jonathan D.A. Jewell <jonathan.jewell@gmail.com>
+:toc: macro
+:icons: font
+:source-highlighter: rouge
+:experimental:
+:url-github: https://github.com/hyperpolymath/universal-language-server-plugin
+:url-gitlab: https://gitlab.com/hyperpolymath/universal-language-server-plugin
+:url-bitbucket: https://bitbucket.org/hyperpolymath/universal-language-server-plugin
+:url-codeberg: https://codeberg.org/hyperpolymath/universal-language-server-plugin
 
-> *One server. All editors. Universal document conversion.*
+Universal Language Server Protocol plugin
 
-LSP-based universal plugin architecture enabling seamless document conversion across all major editors through a single, powerful Rust server.
+image:https://img.shields.io/badge/RSR-Certified-gold[RSR Certified]
+image:https://img.shields.io/badge/License-AGPL%20v3-blue[License]
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Rust](https://img.shields.io/badge/Rust-1.75+-orange.svg)](https://www.rust-lang.org/)
-[![LSP 3.17](https://img.shields.io/badge/LSP-3.17-green.svg)](https://microsoft.github.io/language-server-protocol/)
+toc::[]
 
-== Features
+== Overview
 
-🚀 *Universal Editor Support* - One server powers plugins for VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, and Helix
+universal-language-server-plugin is part of the link:https://rhodium.sh[Rhodium Standard] (RSR) ecosystem.
 
-⚡ *High Performance* - Sub-100ms responses, <50MB memory, <500ms startup
+Domain: *software-development*
 
-🔄 *Smart Conversion* - Bidirectional document conversion (Markdown ↔ HTML ↔ JSON)
+== Installation
 
-🌐 *Web Dashboard* - Real-time document management and live conversion UI
+[source,bash]
+----
+# Clone from GitHub (primary)
+git clone {url-github}
 
-📡 *Real-time Updates* - WebSocket support for collaborative workflows
+# Or from mirrors
+git clone {url-gitlab}
+git clone {url-codeberg}
+----
 
-🎯 *LSP Compliant* - Strict adherence to Language Server Protocol 3.17
+== RSR Stack
 
-== Quick Start
+This project follows RSR conventions:
 
-=== Installation
+* ✅ ReScript for frontend/logic
+* ✅ Deno for JS runtime
+* ✅ WASM for performance-critical code
+* ✅ Rust/OCaml/Haskell for systems/proofs
+* ✅ Guile/Scheme for configuration
+* ❌ No TypeScript
+* ❌ No Go
+* ❌ No npm
 
-==== From Source (Recommended)
+== Mirrors
 
-```bash
-= Clone repository
-git clone https://github.com/universal-connector/universal-language-connector.git
-cd universal-language-connector
+[cols="1,2"]
+|===
+| Platform | URL
 
-= Build and install server
-make install
-
-= Verify installation
-universal-connector-server --version
-```
-
-==== Using Docker
-
-```bash
-docker run -p 8080:8080 -p 8081:8081 universal-connector:latest
-```
-
-=== Editor Setup
-
-==== VS Code
-
-```bash
-cd clients/vscode
-npm install
-npm run compile
-code --install-extension .
-```
-
-==== Neovim
-
-Add to your config:
-
-```lua
-require('universal-connector').setup()
-```
-
-==== Emacs
-
-```elisp
-(use-package universal-connector
-  :load-path "path/to/clients/emacs"
-  :hook ((markdown-mode html-mode json-mode) . universal-connector-enable))
-```
-
-See [Client Documentation](docs/CLIENT_DEVELOPMENT.md) for all editors.
-
-== Usage
-
-=== LSP Integration (Editors)
-
-Once configured, the connector provides:
-
-- *Format-aware completions* - Suggest conversions based on document type
-- *Hover documentation* - Show document statistics and format info
-- *Execute commands* - Convert documents with keyboard shortcuts
-- *Real-time diagnostics* - Validate document format
-
-*Commands:*
-- `convert.toHtml` - Convert to HTML
-- `convert.toMarkdown` - Convert to Markdown
-- `convert.toJson` - Convert to JSON
-
-=== HTTP API
-
-```bash
-= Convert document
-curl -X POST http://localhost:8080/api/convert \
-  -H "Content-Type: application/json" \
-  -d '{
-    "content": "# Hello World",
-    "from": "markdown",
-    "to": "html"
-  }'
-
-= List documents
-curl http://localhost:8080/api/documents
-
-= Server statistics
-curl http://localhost:8080/api/stats
-```
-
-See [API Documentation](docs/API.md) for complete reference.
-
-=== Web UI
-
-Open `http://localhost:8080` in your browser for:
-
-- Live document converter
-- Document manager
-- Real-time WebSocket updates
-- Server statistics dashboard
-
-== Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Editor Clients (<100 LOC)                 │
-│  VS Code │ Neovim │ Emacs │ JetBrains │ Sublime │ Zed │ Helix│
-└───────────────────────────┬─────────────────────────────────┘
-                            │ LSP over stdio
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│                  Universal Connector Server (Rust)           │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ LSP Handler  │  │  HTTP API    │  │  WebSocket   │      │
-│  │ (tower-lsp)  │  │  (axum)      │  │  (tokio-ws)  │      │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘      │
-│         └──────────────────┴──────────────────┘              │
-│                  ┌────────────────────┐                      │
-│                  │  Conversion Core   │                      │
-│                  │  (markdown/html/   │                      │
-│                  │   json/custom)     │                      │
-│                  └────────────────────┘                      │
-└─────────────────────────────────────────────────────────────┘
-```
-
-=== Why This Works
-
-The "universal" approach succeeds because:
-
-1. *LSP abstracts editor differences* - Single protocol for all editors
-2. *Stdio is universal* - Every editor can spawn processes
-3. *Server holds state* - Clients remain stateless and simple
-4. *Battle-tested protocol* - LSP 3.17 is proven and robust
-
-== Supported Conversions
-
-| From     | To       | Quality | Notes                           |
-|----------|----------|---------|---------------------------------|
-| Markdown | HTML     | ✅ High | Full support via pulldown-cmark |
-| Markdown | JSON     | ✅ High | Structured representation       |
-| HTML     | Markdown | ⚠️ Good | Some formatting may be lost     |
-| HTML     | JSON     | ✅ High | DOM structure extraction        |
-| JSON     | Markdown | ✅ High | Key-value representation        |
-| JSON     | HTML     | ✅ High | Via Markdown intermediary       |
-
-== Development
-
-=== Prerequisites
-
-- Rust 1.75+
-- Node.js 18+ (for VS Code client)
-- Docker/Podman (optional)
-
-=== Build
-
-```bash
-= Debug build
-make build
-
-= Release build
-make release
-
-= Run tests
-make test
-
-= Start development server
-make dev
-```
-
-=== Project Structure
-
-```
-universal-language-server-plugin/
-├── server/          # Rust server (LSP, HTTP, WebSocket)
-├── clients/         # Editor clients (<100 LOC each)
-│   ├── vscode/     # VS Code extension
-│   ├── neovim/     # Neovim plugin
-│   ├── emacs/      # Emacs package
-│   ├── jetbrains/  # JetBrains plugin
-│   ├── sublime/    # Sublime Text plugin
-│   ├── zed/        # Zed configuration
-│   └── helix/      # Helix configuration
-├── web/             # Web UI (HTML/CSS/JS)
-├── deployment/      # Docker and deployment configs
-├── docs/            # Documentation
-└── examples/        # Usage examples
-```
-
-=== Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
-
-- Development setup
-- Code style guidelines
-- Submission process
-- Architecture details
-
-== Performance
-
-Benchmarks on AMD Ryzen 7 5800X:
-
-| Operation          | Time     | Memory   |
-|--------------------|----------|----------|
-| Server startup     | 450ms    | 12MB     |
-| Markdown → HTML    | 2.5ms    | +2MB     |
-| HTML → Markdown    | 8.3ms    | +4MB     |
-| LSP completion     | 1.2ms    | +0.5MB   |
-| HTTP API call      | 3.8ms    | +1MB     |
-| 100 concurrent     | 95ms     | 48MB     |
-
-*Targets:*
-- Response time: <100ms ✅
-- Memory usage: <50MB ✅
-- Startup time: <500ms ✅
-
-== Configuration
-
-=== Server
-
-Set via environment variables:
-
-```bash
-= Server addresses
-export HTTP_ADDR="0.0.0.0:8080"
-export WS_ADDR="0.0.0.0:8081"
-
-= Enable/disable components
-export ENABLE_LSP="true"
-export ENABLE_HTTP="true"
-export ENABLE_WS="true"
-
-= Logging
-export RUST_LOG="info"
-```
-
-=== Clients
-
-Each client has specific configuration. See client README:
-
-- [VS Code](clients/vscode/README.md)
-- [Neovim](clients/neovim/README.md)
-- [Emacs](clients/emacs/README.md)
-- [JetBrains](clients/jetbrains/README.md)
-- [Sublime](clients/sublime/README.md)
-
-== Deployment
-
-=== Docker
-
-```bash
-= Build image
-make docker-build
-
-= Run container
-make docker-run
-
-= Or use docker-compose
-cd deployment
-docker-compose up -d
-```
-
-=== Standalone Binary
-
-```bash
-= Build optimized binary
-make production
-
-= Copy to system
-sudo cp server/target/release/universal-connector-server /usr/local/bin/
-
-= Run
-universal-connector-server
-```
-
-=== systemd Service
-
-```ini
-[Unit]
-Description=Universal Language Connector
-After=network.target
-
-[Service]
-Type=simple
-User=connector
-ExecStart=/usr/local/bin/universal-connector-server
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-```
-
-== Documentation
-
-- [API Reference](docs/API.md) - Complete API documentation
-- [Architecture](docs/ARCHITECTURE.md) - Deep dive into design
-- [Client Development](docs/CLIENT_DEVELOPMENT.md) - Adding new editors
-- [LSP Compliance](docs/LSP_COMPLIANCE.md) - LSP implementation details
-- [Contributing](CONTRIBUTING.md) - Development guide
-
-== Roadmap
-
-- [x] Core LSP server implementation
-- [x] 7 editor clients (VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, Helix)
-- [x] HTTP REST API
-- [x] WebSocket real-time updates
-- [x] Web UI dashboard
-- [ ] WASM core module for sandboxed execution
-- [ ] Advanced format support (YAML, XML, TOML)
-- [ ] Plugin system for custom converters
-- [ ] LSP 3.18 features
-- [ ] Performance optimizations
-- [ ] Official LSP compliance testing
-
-== FAQ
-
-*Q: Why another document converter?*
-A: Universal Language Connector is the only converter that integrates natively with all major editors through LSP, providing a consistent experience everywhere.
-
-*Q: Why Rust?*
-A: Rust provides memory safety, fearless concurrency, and exceptional performance - perfect for a language server that needs to be fast and reliable.
-
-*Q: How does the 100 LOC client constraint work?*
-A: By delegating ALL logic to the server, clients only need to initialize the LSP connection and register commands - typically 50-70 lines of code.
-
-*Q: Can I add my own conversion formats?*
-A: Yes! See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on adding custom converters.
-
-*Q: Is this production-ready?*
-A: The core implementation is complete and tested. Additional hardening, security audits, and real-world testing are needed for production deployment.
+| GitHub (primary) | {url-github}
+| GitLab | {url-gitlab}
+| Bitbucket | {url-bitbucket}
+| Codeberg | {url-codeberg}
+|===
 
 == License
 
-MIT License - see [LICENSE](LICENSE) for details.
+Licensed under AGPL-3.0-or-later OR LicenseRef-Palimpsest-0.5.
 
-== Acknowledgments
+See link:LICENSE[LICENSE] for details.
 
-- [tower-lsp](https://github.com/ebkalderon/tower-lsp) - LSP framework
-- [axum](https://github.com/tokio-rs/axum) - HTTP framework
-- [pulldown-cmark](https://github.com/raphlinus/pulldown-cmark) - Markdown parser
-- All the editor communities for excellent LSP support
+== Contributing
 
-== Citation
+See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
 
-If you use Universal Language Connector in your research or project, please cite:
+== Metadata
 
-```bibtex
-@software{universal_language_connector,
-  title = {Universal Language Connector},
-  year = {2025},
-  author = {Universal Connector Contributors},
-  url = {https://github.com/universal-connector/universal-language-connector}
-}
-```
-
----
-
-*Built with ❤️ using Rust and LSP*
+* Domain: software-development
+* Framework: RSR (Rhodium Standard Repository)
+* Dublin Core: link:.well-known/dc.xml[.well-known/dc.xml]
