@@ -7,7 +7,7 @@ FROM rust:1.75-slim as builder
 WORKDIR /build
 
 # Install build dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apk add --no-cache -y \
     pkg-config \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -28,12 +28,12 @@ COPY server/src ./src
 RUN cargo build --release --bin universal-connector-server
 
 # Runtime stage
-FROM debian:bookworm-slim
+FROM cgr.dev/chainguard/wolfi-base:bookworm-slim
 
 WORKDIR /app
 
 # Install runtime dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apk add --no-cache -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
