@@ -1,16 +1,18 @@
-# Universal Language Connector - Dockerfile
+# Universal Language Connector - Containerfile
 # Multi-stage build for optimal image size
+# SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
 
-# Build stage
-FROM rust:1.75-slim as builder
+# Build stage - use rust:alpine for musl-based static binary
+FROM rust:1.83-alpine AS builder
 
 WORKDIR /build
 
-# Install build dependencies
-RUN apt-get update && apk add --no-cache -y \
-    pkg-config \
-    libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Install build dependencies (Alpine uses apk)
+RUN apk add --no-cache \
+    musl-dev \
+    pkgconfig \
+    openssl-dev \
+    openssl-libs-static
 
 # Copy manifests
 COPY server/Cargo.toml server/Cargo.lock ./
@@ -24,18 +26,18 @@ RUN mkdir src && \
 # Copy source code
 COPY server/src ./src
 
-# Build for release
+# Build for release with static linking
 RUN cargo build --release --bin universal-connector-server
 
-# Runtime stage
-FROM cgr.dev/chainguard/wolfi-base:bookworm-slim
+# Runtime stage - use wolfi distroless for security
+FROM cgr.dev/chainguard/wolfi-base:latest
 
 WORKDIR /app
 
-# Install runtime dependencies
-RUN apt-get update && apk add --no-cache -y \
+# Install minimal runtime dependencies (wolfi uses apk)
+RUN apk add --no-cache \
     ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    wget
 
 # Copy binary from builder
 COPY --from=builder /build/target/release/universal-connector-server /usr/local/bin/
@@ -43,8 +45,8 @@ COPY --from=builder /build/target/release/universal-connector-server /usr/local/
 # Copy web UI (optional, for serving static files)
 COPY web /app/web
 
-# Create non-root user
-RUN useradd -m -u 1000 connector && \
+# Create non-root user (wolfi uses adduser)
+RUN adduser -D -u 1000 connector && \
     chown -R connector:connector /app
 
 USER connector
@@ -52,9 +54,9 @@ USER connector
 # Expose ports
 EXPOSE 8080 8081
 
-# Health check
+# Health check using wget (lighter than curl)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD ["sh", "-c", "curl -f http://localhost:8080/api/health || exit 1"]
+    CMD ["sh", "-c", "wget -q --spider http://localhost:8080/api/health || exit 1"]
 
 # Run server
 CMD ["universal-connector-server"]

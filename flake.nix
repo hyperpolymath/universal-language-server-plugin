@@ -83,8 +83,8 @@
 
           meta = with pkgs.lib; {
             description = "LSP-based universal plugin architecture for document conversion";
-            homepage = "https://github.com/universal-connector/universal-language-connector";
-            license = with licenses; [ mit ];
+            homepage = "https://github.com/hyperpolymath/universal-language-server-plugin";
+            license = with licenses; [ mit agpl3Plus ];
             maintainers = [ ];
             mainProgram = "universal-connector-server";
           };
@@ -107,8 +107,8 @@
             rust-analyzer
             just
             nodejs_20
-            docker
-            docker-compose
+            podman
+            podman-compose
           ];
 
           shellHook = ''
