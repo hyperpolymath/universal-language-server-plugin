@@ -177,7 +177,7 @@ async fn validate_document(
 async fn get_stats(State(state): State<Arc<ServerState>>) -> Json<ServerStats> {
     Json(ServerStats {
         document_count: state.documents.count(),
-        uptime_seconds: 0, // TODO: Track actual uptime
+        uptime_seconds: state.health_checker.uptime_seconds(),
         version: env!("CARGO_PKG_VERSION").to_string(),
     })
 }

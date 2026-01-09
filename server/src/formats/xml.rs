@@ -1,24 +1,23 @@
 //! XML format support for document conversion
 
-use anyhow::Result;
+use anyhow::{Result, Context};
 use serde_json::Value;
+use quick_xml::de::from_str as xml_from_str;
+use quick_xml::se::to_string as xml_to_string;
 
 /// Convert XML to JSON
 pub fn xml_to_json(xml: &str) -> Result<String> {
-    // Placeholder: use quick-xml or serde-xml-rs in production
-    let value: Value = serde_json::json!({
-        "xml_root": {
-            "content": xml
-        }
-    });
+    let value: Value = xml_from_str(xml)
+        .context("Failed to parse XML")?;
     Ok(serde_json::to_string_pretty(&value)?)
 }
 
 /// Convert JSON to XML
 pub fn json_to_xml(json: &str) -> Result<String> {
     let value: Value = serde_json::from_str(json)?;
-    Ok(format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>\n  {}\n</root>",
-               serde_json::to_string_pretty(&value)?))
+    let xml = xml_to_string(&value)
+        .context("Failed to serialize to XML")?;
+    Ok(format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}", xml))
 }
 
 /// Validate XML syntax

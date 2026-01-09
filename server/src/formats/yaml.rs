@@ -7,18 +7,14 @@ use serde_json::Value;
 
 /// Convert YAML to JSON
 pub fn yaml_to_json(yaml: &str) -> Result<String> {
-    // In production, use serde_yaml crate
-    // Placeholder implementation
-    let value: Value = serde_json::from_str(&format!(r#"{{"yaml_content": "{}"}}"#, yaml.escape_default()))?;
+    let value: Value = serde_yaml::from_str(yaml)?;
     Ok(serde_json::to_string_pretty(&value)?)
 }
 
 /// Convert JSON to YAML
 pub fn json_to_yaml(json: &str) -> Result<String> {
-    // In production, use serde_yaml crate
-    // Placeholder implementation
     let value: Value = serde_json::from_str(json)?;
-    Ok(format!("# YAML representation\n{}", serde_json::to_string_pretty(&value)?))
+    Ok(serde_yaml::to_string(&value)?)
 }
 
 /// Convert YAML to Markdown

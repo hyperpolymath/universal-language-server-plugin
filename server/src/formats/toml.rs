@@ -1,22 +1,20 @@
 //! TOML format support for document conversion
 
-use anyhow::Result;
+use anyhow::{Result, Context};
 use serde_json::Value;
 
 /// Convert TOML to JSON
-pub fn toml_to_json(toml: &str) -> Result<String> {
-    // Placeholder: use toml crate in production
-    let value: Value = serde_json::json!({
-        "toml_content": toml
-    });
+pub fn toml_to_json(toml_str: &str) -> Result<String> {
+    let value: Value = toml::from_str(toml_str)
+        .context("Failed to parse TOML")?;
     Ok(serde_json::to_string_pretty(&value)?)
 }
 
 /// Convert JSON to TOML
 pub fn json_to_toml(json: &str) -> Result<String> {
     let value: Value = serde_json::from_str(json)?;
-    // Placeholder: use toml crate for proper serialization
-    Ok(format!("# TOML\n[data]\ncontent = '''{}'''", value))
+    toml::to_string_pretty(&value)
+        .context("Failed to serialize to TOML")
 }
 
 /// Validate TOML syntax

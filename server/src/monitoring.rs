@@ -255,6 +255,14 @@ impl HealthChecker {
         }
     }
 
+    /// Get uptime in seconds
+    pub fn uptime_seconds(&self) -> u64 {
+        Utc::now()
+            .signed_duration_since(self.start_time)
+            .num_seconds()
+            .max(0) as u64
+    }
+
     /// Perform health check
     pub async fn check(&self, metrics: &Metrics) -> HealthStatus {
         let mut checks = HashMap::new();
