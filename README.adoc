@@ -1,12 +1,12 @@
 = Universal Language Connector
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 
 > *One server. All editors. Universal document conversion.*
 
 LSP-based universal plugin architecture enabling seamless document conversion across all major editors through a single, powerful Rust server.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange.svg)](https://www.rust-lang.org/)
 [![LSP 3.17](https://img.shields.io/badge/LSP-3.17-green.svg)](https://microsoft.github.io/language-server-protocol/)
 
@@ -33,18 +33,18 @@ LSP-based universal plugin architecture enabling seamless document conversion ac
 ```bash
 = Clone repository
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 git clone https://github.com/universal-connector/universal-language-connector.git
 cd universal-language-connector
 
 = Build and install server
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make install
 
 = Verify installation
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 universal-connector-server --version
 ```
 
@@ -104,7 +104,7 @@ Once configured, the connector provides:
 ```bash
 = Convert document
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 curl -X POST http://localhost:8080/api/convert \
   -H "Content-Type: application/json" \
   -d '{
@@ -115,12 +115,12 @@ curl -X POST http://localhost:8080/api/convert \
 
 = List documents
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 curl http://localhost:8080/api/documents
 
 = Server statistics
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 curl http://localhost:8080/api/stats
 ```
 
@@ -192,22 +192,22 @@ The "universal" approach succeeds because:
 ```bash
 = Debug build
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make build
 
 = Release build
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make release
 
 = Run tests
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make test
 
 = Start development server
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make dev
 ```
 
@@ -266,20 +266,20 @@ Set via environment variables:
 ```bash
 = Server addresses
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 export HTTP_ADDR="0.0.0.0:8080"
 export WS_ADDR="0.0.0.0:8081"
 
 = Enable/disable components
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 export ENABLE_LSP="true"
 export ENABLE_HTTP="true"
 export ENABLE_WS="true"
 
 = Logging
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 export RUST_LOG="info"
 ```
 
@@ -300,17 +300,17 @@ Each client has specific configuration. See client README:
 ```bash
 = Build image
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make docker-build
 
 = Run container
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make docker-run
 
 = Or use docker-compose
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 cd deployment
 docker-compose up -d
 ```
@@ -320,17 +320,17 @@ docker-compose up -d
 ```bash
 = Build optimized binary
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 make production
 
 = Copy to system
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 sudo cp server/target/release/universal-connector-server /usr/local/bin/
 
 = Run
 
-image:https://img.shields.io/badge/license-Palimpsest--MPL--1.0-purple.svg[Palimpsest-MPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 universal-connector-server
 ```
 
