@@ -417,3 +417,8 @@ If you use Universal Language Connector in your research or project, please cite
 ---
 
 *Built with ❤️ using Rust and LSP*
+
+
+== Architecture
+
+See link:TOPOLOGY.md[TOPOLOGY.md] for a visual architecture map and completion dashboard.
