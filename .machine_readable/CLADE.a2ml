@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Clade declaration — part of the gv-clade-index registry
+# See: https://github.com/hyperpolymath/gv-clade-index
+
+[identity]
+uuid = "7c29b884-00a0-52bb-b9e1-35a288f1e38f"
+primary-forge = "github"
+primary-owner = "hyperpolymath"
+canonical-name = "universal-language-server-plugin"
+prefixed-name = "dx-universal-language-server-plugin"
+
+[clade]
+primary = "dx"
+secondary = []
+assigned = "2026-03-16"
+rationale = ""
+
+[forges]
+github = "hyperpolymath/universal-language-server-plugin"
+gitlab = "hyperpolymath/universal-language-server-plugin"
+bitbucket = "hyperpolymath/universal-language-server-plugin"
+
+[lineage]
+type = "standalone"
+parent = "Universal LSP plugin"
+born = "2026-03-16"
