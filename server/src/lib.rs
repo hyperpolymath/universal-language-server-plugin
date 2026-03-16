@@ -7,6 +7,7 @@
 #![deny(clippy::all)]
 #![warn(clippy::pedantic)]
 
+#![forbid(unsafe_code)]
 pub mod auth;
 pub mod core;
 pub mod document_store;
