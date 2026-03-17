@@ -1,0 +1,18 @@
+# ⚓ ANCHOR: universal-language-server-plugin
+# This is the canonical authority for the universal-language-server-plugin repository.
+
+id: "org.hyperpolymath.universal-language-server-plugin"
+version: "1.0.0"
+clade: "unknown"
+status: "active"
+
+# SSG Configuration (Unified boj-server build)
+ssg:
+  engine: "casket"
+  output_dir: "public"
+  boj_trigger: true
+  cartridge: "ssg-mcp"
+
+# Relationships
+parents:
+  - "org.hyperpolymath.boj-server"
