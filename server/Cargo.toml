@@ -57,7 +57,7 @@ quick-xml = { version = "0.31", features = ["serialize"] }  # XML support
 toml = "0.8"            # TOML support
 
 # Authentication and security (Platinum RSR)
-jsonwebtoken = "9.2"    # JWT token handling
+jsonwebtoken = "10.3"    # JWT token handling
 bcrypt = "0.15"         # Password hashing
 
 # UUID generation
