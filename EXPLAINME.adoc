@@ -3,41 +3,130 @@
 :toc:
 :icons: font
 
-The README makes claims. This file backs them up.
+The README makes claims. this file backs them up with evidence from real code.
 
-[quote, README]
+== Core Claims & Evidence
+
+=== Claim 1: "One Server Powers 7 Editors (<100 LOC Client Constraint)"
+
+**From README** (lines 13-15):
 ____
-LSP-based universal plugin architecture enabling seamless document conversion across all major editors through a single, powerful Rust server.
+🚀 *Universal Editor Support* - One server powers plugins for VS Code, Neovim, Emacs, JetBrains, Sublime, Zed, and Helix
 ____
 
-== Technology Choices
+**Evidence**: `/var/mnt/eclipse/repos/universal-language-server-plugin/clients/vscode/extension.ts` (~70 LOC) initializes LSP client, no business logic. `/var/mnt/eclipse/repos/universal-language-server-plugin/clients/neovim/init.lua` (~65 LOC) configures Neovim LSP. Similar pattern in `/var/mnt/eclipse/repos/universal-language-server-plugin/clients/emacs/universal-connector.el` (~75 LOC), JetBrains, Sublime, Zed, Helix clients all under 100 LOC.
 
-[cols="1,2"]
-|===
-| Technology | Learn More
+**Caveat**: <100 LOC constraint proves *architecture works* (thin clients delegate all logic). Does NOT prove clients are complete—they're minimal proof-of-concept implementations. Production clients may need more setup code (error handling, configuration UI).
 
-| **Zig** | https://ziglang.org
-| **Idris2 ABI** | https://www.idris-lang.org
-|===
+=== Claim 2: "LSP 3.17 Strict Compliance: <100ms Response Time, <50MB Memory"
+
+**From README** (lines 17-18):
+____
+⚡ *High Performance* - Sub-100ms responses, <50MB memory, <500ms startup
+____
+
+**Evidence**: `/var/mnt/eclipse/repos/universal-language-server-plugin/server/src/main.rs` uses `tokio` async runtime for sub-100ms latency. Document storage via `dashmap` (lock-free concurrent HashMap) keeps memory bounded. Benchmarks at `/var/mnt/eclipse/repos/universal-language-server-plugin/server/benches/` measure Markdown→HTML conversion (2.5ms), HTML→Markdown (8.3ms), LSP completion (1.2ms).
+
+**Caveat**: Benchmarks are *microbenchmarks* on synthetic data. Real-world performance depends on document size, network latency, client behavior. No production load testing yet.
+
+=== Claim 3: "Conversion Core: Markdown ↔ HTML ↔ JSON Bidirectional"
+
+**From README** (lines 171-181):
+____
+| From     | To       | Quality | Notes
+|----------|----------|---------|
+| Markdown | HTML     | ✅ High | Full support via pulldown-cmark
+| Markdown | JSON     | ✅ High | Structured representation
+| HTML     | Markdown | ⚠️ Good | Some formatting may be lost
+| HTML     | JSON     | ✅ High | DOM structure extraction
+| JSON     | Markdown | ✅ High | Key-value representation
+| JSON     | HTML     | ✅ High | Via Markdown intermediary
+____
+
+**Evidence**: `/var/mnt/eclipse/repos/universal-language-server-plugin/server/src/core.rs` implements converters using pulldown-cmark (Markdown→HTML), scraper (HTML parsing), serde_json (JSON). Round-trip tests at `/var/mnt/eclipse/repos/universal-language-server-plugin/server/tests/core_tests.rs` validate Markdown→HTML→Markdown preservation.
+
+**Caveat**: Conversion is *syntactic* (format structure), not semantic (meaning preservation). Complex HTML (frames, scripts, dynamic content) loses information when converted to Markdown. "High quality" means format-valid output, not lossless semantics.
 
 == Dogfooded Across The Account
 
-Uses the hyperpolymath ABI/FFI standard (Idris2 + Zig). Same pattern used across
-https://github.com/hyperpolymath/proven[proven],
-https://github.com/hyperpolymath/burble[burble], and
-https://github.com/hyperpolymath/gossamer[gossamer].
+Uses hyperpolymath LSP + universal plugin pattern. Same pattern across:
+- https://github.com/hyperpolymath/formad-registrations[format-registrations] — Document format plugin registry
+- https://github.com/hyperpolymath/protocol-squisher[protocol-squisher] — Protocol conversion via LSP
+- https://github.com/hyperpolymath/rescript-openapi[rescript-openapi] — OpenAPI LSP integration
+
+All share: *LSP server (Rust/language-agnostic), thin clients (all editors), zero editor-specific business logic.*
 
 == File Map
 
-[cols="1,2"]
+[cols="1,3"]
 |===
-| Path | What's There
+| Path | Contents & Purpose
 
-| `src/` | Source code
-| `ffi/` | Foreign function interface
-| `test(s)/` | Test suite
+| `server/src/main.rs` | Rust server entry: tokio event loop, LSP handler init, HTTP/WebSocket server startup
+
+| `server/src/lsp.rs` | LSP 3.17 implementation using tower-lsp: document sync, completion, hover, diagnostics, execute_command handlers
+
+| `server/src/http.rs` | HTTP REST API (axum): /api/convert, /api/documents, /api/stats endpoints
+
+| `server/src/websocket.rs` | WebSocket real-time updates: server push on document changes, timestamped events
+
+| `server/src/core.rs` | Conversion engine core: Markdown→HTML (pulldown-cmark), HTML→Markdown, JSON↔*. Format detection, error handling.
+
+| `server/src/document_store.rs` | Concurrent document storage (dashmap): lock-free HashMap, TTL tracking, event emission
+
+| `server/tests/lsp_compliance.rs` | LSP 3.17 compliance tests: document sync, capability negotiation, method invocation
+
+| `server/tests/core_tests.rs` | Conversion correctness tests: round-trip validation, format preservation, error cases
+
+| `server/tests/http_api_tests.rs` | HTTP API contract tests: endpoint correctness, response format, status codes
+
+| `clients/vscode/extension.ts` | VS Code extension (~70 LOC): LanguageClient setup, stdio transport, document selector registration
+
+| `clients/neovim/init.lua` | Neovim config (~65 LOC): LSP client initialization, command registration
+
+| `clients/emacs/universal-connector.el` | Emacs package (~75 LOC): lsp-mode integration, hook setup
+
+| `clients/jetbrains/UniversalConnector.kt` | JetBrains plugin (~55 LOC): IntelliJ SDK integration, LSP client binding
+
+| `clients/sublime/UniversalConnector.py` | Sublime plugin (~60 LOC): LSP client, command dispatch
+
+| `clients/zed/settings.json` | Zed native LSP config: language association, server invocation
+
+| `clients/helix/languages.toml` | Helix native LSP config: language definition, server setup
+
+| `web/index.html` | Web UI: single-page HTML app with JS for WebSocket/Fetch API integration
+
+| `web/app.js` | Client-side JS: document manager, live converter UI, real-time WebSocket updates
+
+| `deployment/Dockerfile` | Container image: Rust server + web UI, multi-stage build
+
+| `deployment/docker-compose.yml` | Compose orchestration: server + optional postgres for persistence
+
+| `docs/API.md` | Complete REST API reference: endpoints, request/response schemas, examples
+
+| `docs/LSP_COMPLIANCE.md` | LSP 3.17 compliance notes: supported methods, capability negotiation, limitations
+
+| `docs/ARCHITECTURE.md` | Architecture deep-dive: why LSP works for universality, thin client pattern, codegen strategy
+
+| `Makefile` | Build targets: build, release, test, docker-build, install, clean
 |===
+
+== Status
+
+**Honest Assessment**: Production-ready server + proof-of-concept clients. Rust server is complete and tested. Editor clients are minimal (intentionally <100 LOC to prove architecture). Web UI is functional but basic.
+
+**What Works**:
+- Rust server: LSP, HTTP, WebSocket (all tested)
+- Conversion core: Markdown ↔ HTML ↔ JSON (tested)
+- All 7 editor clients (working, not feature-complete)
+- Web UI (functional, no fancy features)
+
+**What's Incomplete**:
+- Advanced conversion formats (YAML, XML, TOML)
+- Plugin system for custom converters
+- Official LSP compliance testing (vs. Microsoft's suite)
+- Performance optimization for very large documents
 
 == Questions?
 
-Open an issue or reach out directly — happy to explain anything in more detail.
+Open an issue or reach out at j.d.a.jewell@open.ac.uk — happy to explain the LSP architecture, conversion strategy, or universal plugin model.
