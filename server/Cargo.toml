@@ -68,15 +68,20 @@ uuid = { version = "1.6", features = ["v4", "serde"] }
 tokio-test = "0.4"
 tower-test = "0.4"
 axum-test = "14.3"
+proptest = "1.4"
 
-# Benchmarking (optional, install separately if needed)
-# criterion = { version = "0.5", features = ["async_tokio"] }
+# Benchmarking
+criterion = { version = "0.5", features = ["async_tokio"] }
 
 [profile.release]
 opt-level = 3
 lto = true
 codegen-units = 1
 strip = true
+
+[[bench]]
+name = "lsp_bench"
+harness = false
 
 [profile.dev]
 opt-level = 0
