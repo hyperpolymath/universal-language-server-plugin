@@ -46,7 +46,7 @@ mod tests {
 
     #[test]
     fn test_validate_toml_empty() {
-        let diagnostics = validate_toml("").unwrap();
+        let diagnostics = validate_toml("").expect("TODO: handle error");
         assert!(!diagnostics.is_empty());
     }
 }

@@ -227,7 +227,7 @@ impl ConversionCore {
 
         // Extract headings
         for level in 1..=6 {
-            let selector = Selector::parse(&format!("h{level}")).unwrap();
+            let selector = Selector::parse(&format!("h{level}")).expect("TODO: handle error");
             for element in document.select(&selector) {
                 let text = element.text().collect::<String>();
                 markdown.push_str(&format!("{} {}\n\n", "#".repeat(level), text.trim()));
@@ -268,7 +268,7 @@ impl ConversionCore {
 
         // If we got nothing, just extract all text
         if markdown.trim().is_empty() {
-            let body_selector = Selector::parse("body").unwrap();
+            let body_selector = Selector::parse("body").expect("TODO: handle error");
             if let Some(body) = document.select(&body_selector).next() {
                 markdown = body.text().collect::<String>();
             } else {
@@ -300,7 +300,7 @@ impl ConversionCore {
         // Extract headings
         let mut headings = Vec::new();
         for level in 1..=6 {
-            let selector = Selector::parse(&format!("h{level}")).unwrap();
+            let selector = Selector::parse(&format!("h{level}")).expect("TODO: handle error");
             for element in document.select(&selector) {
                 headings.push(format!("H{}: {}", level, element.text().collect::<String>()));
             }
@@ -412,7 +412,7 @@ mod tests {
     #[test]
     fn test_html_to_markdown() {
         let html = "<h1>Hello World</h1><p>This is a test.</p>";
-        let markdown = ConversionCore::html_to_markdown(html).unwrap();
+        let markdown = ConversionCore::html_to_markdown(html).expect("TODO: handle error");
         assert!(markdown.contains("# Hello World"));
         assert!(markdown.contains("This is a test"));
     }
@@ -424,7 +424,7 @@ mod tests {
             from: Format::Markdown,
             to: Format::Html,
         };
-        let response = ConversionCore::convert(request).unwrap();
+        let response = ConversionCore::convert(request).expect("TODO: handle error");
         assert!(response.content.contains("<h1>"));
     }
 
@@ -435,7 +435,7 @@ mod tests {
             from: Format::Markdown,
             to: Format::Markdown,
         };
-        let response = ConversionCore::convert(request).unwrap();
+        let response = ConversionCore::convert(request).expect("TODO: handle error");
         assert_eq!(response.content, "# Test");
     }
 
@@ -447,25 +447,25 @@ mod tests {
             from: Format::Markdown,
             to: Format::Json,
         };
-        let json_response = ConversionCore::convert(request).unwrap();
+        let json_response = ConversionCore::convert(request).expect("TODO: handle error");
 
         let request = ConversionRequest {
             content: json_response.content,
             from: Format::Json,
             to: Format::Markdown,
         };
-        let md_response = ConversionCore::convert(request).unwrap();
+        let md_response = ConversionCore::convert(request).expect("TODO: handle error");
         assert!(md_response.content.contains("Title"));
     }
 
     #[test]
     fn test_validate_json() {
         let valid = r#"{"key": "value"}"#;
-        let diagnostics = ConversionCore::validate(valid, Format::Json).unwrap();
+        let diagnostics = ConversionCore::validate(valid, Format::Json).expect("TODO: handle error");
         assert!(diagnostics.is_empty());
 
         let invalid = r#"{"key": invalid}"#;
-        let diagnostics = ConversionCore::validate(invalid, Format::Json).unwrap();
+        let diagnostics = ConversionCore::validate(invalid, Format::Json).expect("TODO: handle error");
         assert!(!diagnostics.is_empty());
     }
 }

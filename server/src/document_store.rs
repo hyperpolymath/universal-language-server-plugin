@@ -194,7 +194,7 @@ mod tests {
         assert_eq!(store.count(), 1);
 
         // Get
-        let doc = store.get("file:///test.md").unwrap();
+        let doc = store.get("file:///test.md").expect("TODO: handle error");
         assert_eq!(doc.content, "# Hello");
 
         // Update
@@ -203,7 +203,7 @@ mod tests {
             "# Hello World".to_string(),
             "markdown".to_string(),
         );
-        let doc = store.get("file:///test.md").unwrap();
+        let doc = store.get("file:///test.md").expect("TODO: handle error");
         assert_eq!(doc.content, "# Hello World");
         assert_eq!(doc.version, 2);
 
@@ -237,7 +237,7 @@ mod tests {
         }
 
         for handle in handles {
-            handle.join().unwrap();
+            handle.join().expect("TODO: handle error");
         }
 
         assert_eq!(store.count(), 1000);

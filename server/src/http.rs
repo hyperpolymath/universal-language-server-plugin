@@ -261,10 +261,10 @@ mod tests {
                 Request::builder()
                     .uri("/api/health")
                     .body(Body::empty())
-                    .unwrap(),
+                    .expect("TODO: handle error"),
             )
             .await
-            .unwrap();
+            .expect("TODO: handle error");
 
         assert_eq!(response.status(), StatusCode::OK);
     }
@@ -286,11 +286,11 @@ mod tests {
                     .method("POST")
                     .uri("/api/convert")
                     .header("content-type", "application/json")
-                    .body(Body::from(serde_json::to_string(&payload).unwrap()))
-                    .unwrap(),
+                    .body(Body::from(serde_json::to_string(&payload).expect("TODO: handle error")))
+                    .expect("TODO: handle error"),
             )
             .await
-            .unwrap();
+            .expect("TODO: handle error");
 
         assert_eq!(response.status(), StatusCode::OK);
     }
@@ -313,10 +313,10 @@ mod tests {
                 Request::builder()
                     .uri("/api/documents")
                     .body(Body::empty())
-                    .unwrap(),
+                    .expect("TODO: handle error"),
             )
             .await
-            .unwrap();
+            .expect("TODO: handle error");
 
         assert_eq!(response.status(), StatusCode::OK);
     }

@@ -52,10 +52,10 @@ mod tests {
 
     #[test]
     fn test_format_from_str() {
-        assert_eq!(ExtendedFormat::from_str("yaml").unwrap(), ExtendedFormat::Yaml);
-        assert_eq!(ExtendedFormat::from_str("yml").unwrap(), ExtendedFormat::Yaml);
-        assert_eq!(ExtendedFormat::from_str("xml").unwrap(), ExtendedFormat::Xml);
-        assert_eq!(ExtendedFormat::from_str("toml").unwrap(), ExtendedFormat::Toml);
+        assert_eq!(ExtendedFormat::from_str("yaml").expect("TODO: handle error"), ExtendedFormat::Yaml);
+        assert_eq!(ExtendedFormat::from_str("yml").expect("TODO: handle error"), ExtendedFormat::Yaml);
+        assert_eq!(ExtendedFormat::from_str("xml").expect("TODO: handle error"), ExtendedFormat::Xml);
+        assert_eq!(ExtendedFormat::from_str("toml").expect("TODO: handle error"), ExtendedFormat::Toml);
     }
 
     #[test]

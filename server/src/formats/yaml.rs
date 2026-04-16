@@ -65,14 +65,14 @@ mod tests {
     #[test]
     fn test_validate_yaml_tabs() {
         let yaml = "key:\tvalue"; // Has tab
-        let diagnostics = validate_yaml(yaml).unwrap();
+        let diagnostics = validate_yaml(yaml).expect("TODO: handle error");
         assert!(!diagnostics.is_empty());
         assert!(diagnostics[0].contains("tabs"));
     }
 
     #[test]
     fn test_validate_yaml_empty() {
-        let diagnostics = validate_yaml("   ").unwrap();
+        let diagnostics = validate_yaml("   ").expect("TODO: handle error");
         assert!(!diagnostics.is_empty());
     }
 }

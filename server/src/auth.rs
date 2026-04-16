@@ -296,7 +296,7 @@ mod tests {
         let config = AuthConfig::default();
         let service = AuthService::new(config);
 
-        let token = service.generate_token("user123".to_string(), vec!["read".to_string()]).unwrap();
+        let token = service.generate_token("user123".to_string(), vec!["read".to_string()]).expect("TODO: handle error");
         assert!(token.starts_with("Bearer "));
     }
 

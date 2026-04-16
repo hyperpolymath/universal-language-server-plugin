@@ -70,8 +70,8 @@ impl Metrics {
             if !durations.is_empty() {
                 let sum: u64 = durations.iter().sum();
                 let avg = sum / durations.len() as u64;
-                let max = *durations.iter().max().unwrap();
-                let min = *durations.iter().min().unwrap();
+                let max = *durations.iter().max().expect("TODO: handle error");
+                let min = *durations.iter().min().expect("TODO: handle error");
 
                 // Calculate percentiles
                 let mut sorted = durations.clone();
