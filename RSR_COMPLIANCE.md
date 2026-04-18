@@ -231,7 +231,7 @@ cargo check
 - Cross-platform support
 - All common tasks covered
 
-#### ✅ Just (justfile)
+#### ✅ Just (Justfile)
 - 30+ recipes
 - RSR compliance validation
 - Development workflows
@@ -456,7 +456,7 @@ Document this as **intentional design decision**:
 | .well-known/ai.txt | ✅ | 10/10 | AI training policies |
 | .well-known/humans.txt | ✅ | 10/10 | Comprehensive attribution |
 | TPCF | ✅ | 10/10 | Perimeter 3 implemented |
-| justfile | ✅ | 10/10 | 30+ recipes |
+| Justfile | ✅ | 10/10 | 30+ recipes |
 | flake.nix | ✅ | 10/10 | Nix reproducibility |
 
 ---
@@ -534,7 +534,7 @@ just validate-rsr
 # ✅ .well-known/security.txt
 # ✅ .well-known/ai.txt
 # ✅ .well-known/humans.txt
-# ✅ justfile
+# ✅ Justfile
 # ✅ Makefile
 # ✅ Cargo.toml
 # ✅ Tests compile

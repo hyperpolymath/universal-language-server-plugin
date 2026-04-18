@@ -85,7 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - .well-known/security.txt (RFC 9116)
   - .well-known/ai.txt (AI training policies)
   - .well-known/humans.txt (attribution)
-  - justfile with build recipes
+  - Justfile with build recipes
   - flake.nix for Nix reproducible builds
   - .gitlab-ci.yml for CI/CD
 
