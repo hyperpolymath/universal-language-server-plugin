@@ -67,32 +67,36 @@ impl Metrics {
 
         for entry in self.request_durations.iter() {
             let durations = entry.value();
-            if !durations.is_empty() {
-                let sum: u64 = durations.iter().sum();
-                let avg = sum / durations.len() as u64;
-                let max = *durations.iter().max().expect("TODO: handle error");
-                let min = *durations.iter().min().expect("TODO: handle error");
+            // Skip empty buckets; otherwise destructure min/max via a single fold so the
+            // None branch is structural rather than a panic-with-message.
+            let Some((min, max)) = durations.iter().copied().fold(None, |acc, d| match acc {
+                None => Some((d, d)),
+                Some((lo, hi)) => Some((lo.min(d), hi.max(d))),
+            }) else {
+                continue;
+            };
+            let sum: u64 = durations.iter().sum();
+            let avg = sum / durations.len() as u64;
 
-                // Calculate percentiles
-                let mut sorted = durations.clone();
-                sorted.sort_unstable();
-                let p50 = sorted[sorted.len() / 2];
-                let p95 = sorted[sorted.len() * 95 / 100];
-                let p99 = sorted[sorted.len() * 99 / 100];
+            // Calculate percentiles
+            let mut sorted = durations.clone();
+            sorted.sort_unstable();
+            let p50 = sorted[sorted.len() / 2];
+            let p95 = sorted[sorted.len() * 95 / 100];
+            let p99 = sorted[sorted.len() * 99 / 100];
 
-                endpoint_stats.insert(
-                    entry.key().clone(),
-                    EndpointStats {
-                        count: durations.len() as u64,
-                        avg_ms: avg,
-                        min_ms: min,
-                        max_ms: max,
-                        p50_ms: p50,
-                        p95_ms: p95,
-                        p99_ms: p99,
-                    },
-                );
-            }
+            endpoint_stats.insert(
+                entry.key().clone(),
+                EndpointStats {
+                    count: durations.len() as u64,
+                    avg_ms: avg,
+                    min_ms: min,
+                    max_ms: max,
+                    p50_ms: p50,
+                    p95_ms: p95,
+                    p99_ms: p99,
+                },
+            );
         }
 
         MetricsSnapshot {

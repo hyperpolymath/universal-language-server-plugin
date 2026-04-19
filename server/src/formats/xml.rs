@@ -49,14 +49,14 @@ mod tests {
 
     #[test]
     fn test_validate_xml_empty() {
-        let diagnostics = validate_xml("").expect("TODO: handle error");
+        let diagnostics = validate_xml("").unwrap();
         assert!(!diagnostics.is_empty());
     }
 
     #[test]
     fn test_validate_xml_no_declaration() {
         let xml = "<root></root>";
-        let diagnostics = validate_xml(xml).expect("TODO: handle error");
+        let diagnostics = validate_xml(xml).unwrap();
         assert!(diagnostics.iter().any(|d| d.contains("declaration")));
     }
 }

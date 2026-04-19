@@ -227,10 +227,13 @@ impl ConversionCore {
 
         // Extract headings
         for level in 1..=6 {
-            let selector = Selector::parse(&format!("h{level}")).expect("TODO: handle error");
-            for element in document.select(&selector) {
-                let text = element.text().collect::<String>();
-                markdown.push_str(&format!("{} {}\n\n", "#".repeat(level), text.trim()));
+            // Mirror the `if let Ok(selector) = Selector::parse(...)` pattern used below
+            // for the other selectors so a parse failure is structural, not a panic.
+            if let Ok(selector) = Selector::parse(&format!("h{level}")) {
+                for element in document.select(&selector) {
+                    let text = element.text().collect::<String>();
+                    markdown.push_str(&format!("{} {}\n\n", "#".repeat(level), text.trim()));
+                }
             }
         }
 
@@ -266,13 +269,17 @@ impl ConversionCore {
             }
         }
 
-        // If we got nothing, just extract all text
+        // If we got nothing, just extract all text. Use if-let on the selector parse so
+        // a malformed selector falls back to root-element text rather than panicking.
         if markdown.trim().is_empty() {
-            let body_selector = Selector::parse("body").expect("TODO: handle error");
-            if let Some(body) = document.select(&body_selector).next() {
-                markdown = body.text().collect::<String>();
-            } else {
-                markdown = document.root_element().text().collect::<String>();
+            match Selector::parse("body").ok().and_then(|sel| {
+                document
+                    .select(&sel)
+                    .next()
+                    .map(|body| body.text().collect::<String>())
+            }) {
+                Some(body_text) => markdown = body_text,
+                None => markdown = document.root_element().text().collect::<String>(),
             }
         }
 
@@ -297,12 +304,15 @@ impl ConversionCore {
         let text: String = document.root_element().text().collect();
         data.insert("content", text.trim().to_string());
 
-        // Extract headings
+        // Extract headings — same if-let pattern as html_to_markdown above to avoid panics
+        // on a malformed selector (in practice "h1".."h6" always parse, but stay structural).
         let mut headings = Vec::new();
         for level in 1..=6 {
-            let selector = Selector::parse(&format!("h{level}")).expect("TODO: handle error");
-            for element in document.select(&selector) {
-                headings.push(format!("H{}: {}", level, element.text().collect::<String>()));
+            if let Ok(selector) = Selector::parse(&format!("h{level}")) {
+                for element in document.select(&selector) {
+                    headings
+                        .push(format!("H{}: {}", level, element.text().collect::<String>()));
+                }
             }
         }
         if !headings.is_empty() {
@@ -412,7 +422,7 @@ mod tests {
     #[test]
     fn test_html_to_markdown() {
         let html = "<h1>Hello World</h1><p>This is a test.</p>";
-        let markdown = ConversionCore::html_to_markdown(html).expect("TODO: handle error");
+        let markdown = ConversionCore::html_to_markdown(html).unwrap();
         assert!(markdown.contains("# Hello World"));
         assert!(markdown.contains("This is a test"));
     }
@@ -424,7 +434,7 @@ mod tests {
             from: Format::Markdown,
             to: Format::Html,
         };
-        let response = ConversionCore::convert(request).expect("TODO: handle error");
+        let response = ConversionCore::convert(request).unwrap();
         assert!(response.content.contains("<h1>"));
     }
 
@@ -435,7 +445,7 @@ mod tests {
             from: Format::Markdown,
             to: Format::Markdown,
         };
-        let response = ConversionCore::convert(request).expect("TODO: handle error");
+        let response = ConversionCore::convert(request).unwrap();
         assert_eq!(response.content, "# Test");
     }
 
@@ -447,25 +457,25 @@ mod tests {
             from: Format::Markdown,
             to: Format::Json,
         };
-        let json_response = ConversionCore::convert(request).expect("TODO: handle error");
+        let json_response = ConversionCore::convert(request).unwrap();
 
         let request = ConversionRequest {
             content: json_response.content,
             from: Format::Json,
             to: Format::Markdown,
         };
-        let md_response = ConversionCore::convert(request).expect("TODO: handle error");
+        let md_response = ConversionCore::convert(request).unwrap();
         assert!(md_response.content.contains("Title"));
     }
 
     #[test]
     fn test_validate_json() {
         let valid = r#"{"key": "value"}"#;
-        let diagnostics = ConversionCore::validate(valid, Format::Json).expect("TODO: handle error");
+        let diagnostics = ConversionCore::validate(valid, Format::Json).unwrap();
         assert!(diagnostics.is_empty());
 
         let invalid = r#"{"key": invalid}"#;
-        let diagnostics = ConversionCore::validate(invalid, Format::Json).expect("TODO: handle error");
+        let diagnostics = ConversionCore::validate(invalid, Format::Json).unwrap();
         assert!(!diagnostics.is_empty());
     }
 }

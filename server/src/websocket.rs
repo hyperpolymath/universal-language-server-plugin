@@ -190,8 +190,8 @@ mod tests {
             document_id: "doc-123".to_string(),
         };
 
-        let json = serde_json::to_string(&msg).expect("TODO: handle error");
-        let deserialized: WsMessage = serde_json::from_str(&json).expect("TODO: handle error");
+        let json = serde_json::to_string(&msg).unwrap();
+        let deserialized: WsMessage = serde_json::from_str(&json).unwrap();
 
         match deserialized {
             WsMessage::Subscribe { document_id } => {
@@ -209,7 +209,7 @@ mod tests {
             timestamp: chrono::Utc::now(),
         };
 
-        let json = serde_json::to_string(&msg).expect("TODO: handle error");
+        let json = serde_json::to_string(&msg).unwrap();
         assert!(json.contains("DocumentUpdated"));
         assert!(json.contains("doc-456"));
     }
