@@ -254,7 +254,7 @@ Running 17 benchmark suites...
 
 ## Code Quality
 
-- **SPDX Headers**: All new files include `PMPL-1.0-or-later` headers
+- **SPDX Headers**: All new files include `MPL-2.0` headers
 - **Documentation**: Each test category documented with clear purposes
 - **No Panics**: All tests handle errors gracefully, zero unwrap/expect in test assertions
 - **Type Safety**: Leverages Rust's type system for contract verification
