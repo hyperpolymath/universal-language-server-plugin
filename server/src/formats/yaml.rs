@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! YAML format support for document conversion
 //!
 //! Provides bidirectional conversion between YAML and other formats.

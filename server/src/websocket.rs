@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! WebSocket server for real-time document updates
 //!
 //! Provides bidirectional communication for live collaboration and updates.

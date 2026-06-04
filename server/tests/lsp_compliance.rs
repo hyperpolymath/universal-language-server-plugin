@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! LSP 3.17 compliance tests
 //!
 //! Tests to verify compliance with Language Server Protocol specification

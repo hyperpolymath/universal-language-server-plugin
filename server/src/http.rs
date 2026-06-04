@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! HTTP REST API server using axum
 //!
 //! Provides HTTP endpoints for web integration and non-LSP clients.
