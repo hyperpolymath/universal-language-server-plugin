@@ -14,5 +14,4 @@
   (synopsis "universal-language-server-plugin")
   (description "universal-language-server-plugin — part of the hyperpolymath ecosystem.")
   (home-page "https://github.com/hyperpolymath/universal-language-server-plugin")
-  (license ((@@ (guix licenses) license) "PMPL-1.0-or-later"
-             "https://github.com/hyperpolymath/palimpsest-license")))
+  (license mpl2.0))
