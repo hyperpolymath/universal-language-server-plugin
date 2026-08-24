@@ -1,4 +1,12 @@
 // SPDX-License-Identifier: MPL-2.0
+// Ported via Harvard Engine mechanical processor
+
+module extension;
+
+// TODO: Complete semantic implementation
+
+/* === ORIGINAL TYPESCRIPT CONTEXT ===
+// SPDX-License-Identifier: MPL-2.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // Universal Language Connector - VS Code Client
 // ~70 LOC - All logic delegated to LSP server
@@ -89,3 +97,5 @@ export function deactivate(): Thenable<void> | undefined {
   }
   return client.stop();
 }
+
+==================================== */
