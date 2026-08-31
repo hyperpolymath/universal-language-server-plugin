@@ -1,4 +1,9 @@
 // SPDX-License-Identifier: MPL-2.0
+// Ported via Harvard Engine (Semantic pass)
+
+module extension;
+
+// SPDX-License-Identifier: MPL-2.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // Universal Language Connector - VS Code Client
 // ~70 LOC - All logic delegated to LSP server
@@ -13,7 +18,7 @@ import {
 
 let client: LanguageClient;
 
-export function activate(context: vscode.ExtensionContext) {
+fn activate(context: vscode.ExtensionContext) {
   // Server executable configuration
   const serverOptions: ServerOptions = {
     command: 'universal-connector-server',
@@ -45,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Register commands
   context.subscriptions.push(
     vscode.commands.registerCommand('universalConnector.convertToHtml', async () => {
-      const editor = vscode.window.activeTextEditor;
+      let editor = vscode.window.activeTextEditor;
       if (editor) {
         await client.sendRequest('workspace/executeCommand', {
           command: 'convert.toHtml',
@@ -57,7 +62,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('universalConnector.convertToMarkdown', async () => {
-      const editor = vscode.window.activeTextEditor;
+      let editor = vscode.window.activeTextEditor;
       if (editor) {
         await client.sendRequest('workspace/executeCommand', {
           command: 'convert.toMarkdown',
@@ -69,7 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('universalConnector.convertToJson', async () => {
-      const editor = vscode.window.activeTextEditor;
+      let editor = vscode.window.activeTextEditor;
       if (editor) {
         await client.sendRequest('workspace/executeCommand', {
           command: 'convert.toJson',
@@ -83,9 +88,10 @@ export function activate(context: vscode.ExtensionContext) {
   client.start();
 }
 
-export function deactivate(): Thenable<void> | undefined {
+fn deactivate(): Thenable<void> | undefined {
   if (!client) {
     return undefined;
   }
   return client.stop();
 }
+

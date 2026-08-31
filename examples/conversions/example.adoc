@@ -1,0 +1,48 @@
+== Example Markdown Document
+
+This is an example Markdown document for testing the Universal Language
+Connector.
+
+=== Features
+
+* *Bold text*
+* _Italic text_
+* `+Code inline+`
+
+=== Code Block
+
+[source,rust]
+----
+fn main() {
+    println!("Hello, Universal Connector!");
+}
+----
+
+=== Links
+
+https://github.com/universal-connector[Universal Language Connector]
+
+=== Lists
+
+[arabic]
+. First item
+. Second item
+. Third item
+
+Unordered: - Apple - Banana - Cherry
+
+=== Blockquote
+
+____
+This is a blockquote It can span multiple lines
+____
+
+=== Table
+
+[cols=",",options="header",]
+|===
+|Feature |Status
+|LSP |✅
+|HTTP |✅
+|WebSocket |✅
+|===
