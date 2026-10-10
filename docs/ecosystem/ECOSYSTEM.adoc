@@ -1,0 +1,120 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Ecosystem boundary — universal-language-server-plugin
+:toc:
+
+This file is the F3a write-back surface for owner ruling *D142*. It
+exists because https://github.com/hyperpolymath/universal-language-server-plugin/issues/96[#96]
+asked for the conversion-boundary decision to be recorded where the
+next person can find it, instead of being quietly resolved by whoever
+writes code first.
+
+== The ruling (D142)
+
+[quote]
+____
+OWNER OVERRODE recommendation: the LSP plugin embeds its OWN document
+converter; no docmatrix dependency
+____
+
+* *Provenance (F10a):* asked in `standards#787` decision harvest as the
+`universal-language-server-plugin#96` row; answered by the owner via
+AskUserQuestion selector (direct answer, not applied-unless-struck).
+* *Clock time:* 2026-09-30T14:10Z (harvest table), mirrored to `#96` at
+2026-09-30T14:12Z.
+* *Scope:* repo — binds this repository fully.
+* *Surfaces:*
+https://github.com/hyperpolymath/standards/issues/787#issuecomment-5912989503[standards#787 D127–D156 table]
+and
+https://github.com/hyperpolymath/universal-language-server-plugin/issues/96#issuecomment-5913038149[#96 ruling comment].
+* *Instruction to future agents:* the open question in `#96` is answered
+by this ruling; act on it rather than re-asking.
+
+== What D142 means here
+
+. The converter in `server/src/core.rs` plus
+`server/src/formats/{yaml,xml,toml}.rs` is *self-contained and stays
+that way*. No `docmatrix` crate, binary, submodule, service call-out,
+or shared-converter client may be introduced without a fresh owner
+ruling that supersedes D142 by name.
+. "`Universal document conversion`" in this repo's tagline means
+*editor-delivered* conversion: LSP 3.17 over stdio for the seven thin
+editor clients, plus the HTTP REST API, WebSocket events, and web
+dashboard served by the same Rust server.
+. Boundary *documentation and links* are required and are not
+dependencies. This file, the `README.adoc` boundary section, and
+`.machine_readable/6a2/ECOSYSTEM.a2ml` carry the same truth in three
+renderings; if they ever disagree, this file governs and the others
+must be re-aligned to it.
+
+== Suite map (docmatrix#71, summarised — canon lives there)
+
+The authoritative suite contract is
+https://github.com/hyperpolymath/docmatrix/issues/71[docmatrix#71]. What
+follows is a pointer summary, not a restatement of canon:
+
+[cols="1,3",options="header"]
+|===
+| Component | Boundary
+
+| *This repo* (`universal-language-server-plugin`)
+| One server, all editors. Own embedded converter; LSP/HTTP/WebSocket
+delivery. No docmatrix dependency (D142).
+
+| https://github.com/hyperpolymath/docmatrix[docmatrix]
+| Multi-format conversion and precision infrastructure for the document
+suite; owns the versioned interchange contract and precision
+coordination.
+
+| https://github.com/hyperpolymath/formatrix-docs[formatrix-docs]
+| Tabbed views of one logical document across TXT,
+delimiter-selected tabular text, Markdown, AsciiDoc, Djot, and A2ML;
+synchronised editing is the intended progression.
+
+| https://github.com/hyperpolymath/blocky-writer[blocky-writer]
+| Fitting and placement into fixed-layout PDF and application-form
+boxes, baselines, and per-character cells designed for hand spacing.
+Not in the conversion business at all (their words, `#96`).
+
+| ForthWall (proposed)
+| Optional, capability-bounded execution layer for critical operations;
+never a mandatory end-user product or runtime.
+|===
+
+Composition rules we inherit from `docmatrix#71` and honour:
+
+* Each component remains useful standalone; composition is explicit and
+user-selected.
+* No supported workflow requires Microsoft Word (or any other mandatory
+hub format) as an intermediate.
+* The user's native input stays authoritative unless they explicitly
+select another representation; lossy or ambiguous transformations are
+proposals requiring approval, never silent normalisation.
+* Proof obligations do not transfer: our conversion round-trip tests
+prove our converter, nothing else.
+
+== What would require re-ruling
+
+Any of the following re-opens the boundary question and must be raised
+as a new row on the standing decision surface (`standards#787`
+successor) rather than implemented directly:
+
+* Adding a docmatrix dependency (library, service, submodule, or
+interchange-client).
+* Implementing the suite's versioned interchange contract as a
+*mandatory* path instead of an opt-in composition.
+* Routing any supported workflow through a mandatory hub format.
+* Changing this repo's tagline or description in a way that claims the
+suite precision-infrastructure remit.
+
+== History
+
+* 2026-09-27 — `#96` filed (boundary overlap flagged, `ECOSYSTEM.adoc`
+recording requested).
+* 2026-09-30 — D142 ruled by owner; ruling mirrored to `#96`.
+* 2026-10-10 — F3a write-back executed on session
+`arena/dee33dad`: README boundary section, this file,
+`.machine_readable/6a2/ECOSYSTEM.a2ml` alignment, `TOPOLOGY.adoc`
+pointer. (Sandbox token lacks issue-comment scope, so the F5a claim and
+`#96` close-out comment are recorded here and in the landing PR
+instead of as issue comments.)
