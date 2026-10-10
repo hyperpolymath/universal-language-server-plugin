@@ -38,6 +38,15 @@
                         └─────────────────────────────────────────┘
 ....
 
+=== Ecosystem boundary (D142 — pointer, not a second truth)
+
+Per owner ruling *D142* (2026-09-30, scope: repo) this repo's Conversion
+Core is *embedded and self-contained* — there is no docmatrix
+dependency and no shared-converter call-out. The conversion box in the
+diagram above is `server/src/core.rs` + `server/src/formats/` only.
+Canon: `docs/ecosystem/ECOSYSTEM.adoc` and the `README.adoc` boundary
+section (see https://github.com/hyperpolymath/universal-language-server-plugin/issues/96[#96]).
+
 === Completion Dashboard
 
 ....

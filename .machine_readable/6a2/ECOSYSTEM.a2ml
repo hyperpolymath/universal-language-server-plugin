@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MPL-2.0
 # ECOSYSTEM.a2ml — Ecosystem position
 # Converted from ECOSYSTEM.scm on 2026-03-15
+# Boundary aligned to D142 write-back on 2026-10-10; prose canon in docs/ecosystem/ECOSYSTEM.adoc
 
 [metadata]
 project = "universal-language-server-plugin"
@@ -8,3 +9,19 @@ ecosystem = "hyperpolymath"
 
 [position]
 type = "component"
+
+[boundary]
+# Owner ruling D142 (2026-09-30T14:10Z, scope: repo): this repo embeds its OWN
+# document converter (server/src/core.rs + server/src/formats/); no docmatrix dependency.
+converter = "embedded"
+docmatrix_dependency = false
+ruling = "D142"
+ruling_surface = "https://github.com/hyperpolymath/standards/issues/787#issuecomment-5912989503"
+ruling_issue = "https://github.com/hyperpolymath/universal-language-server-plugin/issues/96"
+canon = "docs/ecosystem/ECOSYSTEM.adoc"
+
+[suite]
+docmatrix = "https://github.com/hyperpolymath/docmatrix"
+docmatrix_contract = "https://github.com/hyperpolymath/docmatrix/issues/71"
+formatrix_docs = "https://github.com/hyperpolymath/formatrix-docs"
+blocky_writer = "https://github.com/hyperpolymath/blocky-writer"
