@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: MPL-2.0
+# Manifest for this repository (schema proven/manifest/v1); see
+# hyperpolymath/proven-cicd-and-workflows docs/PROVEN-ADOPTION.adoc.
+#
+# Detected: rust (server/Cargo.toml: the real product), zig (ffi/zig), node
+# (clients/vscode/package.json, web/app.js), python (clients/sublime), kotlin
+# (clients/jetbrains), lua (clients/neovim), shell (setup.sh, .githooks).
+#
+# Every Rust command below is stated explicitly because the Justfile `test` and
+# `build` recipes would otherwise be inherited by EVERY detected language (the
+# umbrella prefers a justfile recipe over a language default), which would run
+# `cargo test` once per editor client. Commands run from the repository root,
+# hence `cd server`.
+
+schema = "proven/manifest/v1"
+
+# ── rust: server/ ─────────────────────────────────────────────────────────────
+# Unit: src/ unit tests plus the in-process component suites (core, contract,
+# aspect, property). 35 + 23 + 22 + 15 + 16 tests.
+[categories.unit.rust]
+command = "cd server && cargo test --locked --lib --bins --test core_tests --test contract_tests --test aspect_tests --test property_tests"
+
+# Smoke: the end-to-end document pipeline (open, store, retrieve, convert,
+# verify), 13 tests. It is in-process: it does not start the HTTP, WebSocket or
+# stdio servers.
+[categories.smoke.rust]
+command = "cd server && cargo test --locked --test e2e_tests"
+
+[categories.build.rust]
+command = "cd server && cargo build --locked --all-targets"
+
+# P2P: there is a real seam (LSP over stdio, an HTTP API, a WebSocket endpoint)
+# but nothing tests it. server/tests/http_api_tests.rs has empty bodies marked
+# "structural examples", and lsp_compliance.rs only constructs lsp_types values.
+# Counting them would be vacuous, so this is a visible, expiring waiver.
+[categories.p2p.rust.waiver]
+reason = "no test drives the HTTP, WebSocket or LSP transports end to end: server/tests/http_api_tests.rs has empty test bodies and lsp_compliance.rs only builds lsp_types values; a real transport test is needed"
+until = "2026-12-31"
+
+# ── zig: ffi/zig ──────────────────────────────────────────────────────────────
+# ffi/zig is a partly rendered RSR scaffold: build.zig (6) and
+# test/integration_test.zig (44) still contain the literal placeholder {{project}}
+# (library name, header path, extern fn names), so `zig build` and
+# `zig build test` cannot succeed. Waivers, not N/A: a real FFI layer is intended.
+[categories.unit.zig.waiver]
+reason = "ffi/zig is a partly rendered scaffold: build.zig and test/integration_test.zig still contain the {{project}} placeholder, so zig build test cannot compile"
+until = "2026-12-31"
+[categories.build.zig.waiver]
+reason = "ffi/zig/build.zig still contains {{project}} placeholders (library name, include/{{project}}.h)"
+until = "2026-12-31"
+[categories.smoke.zig.waiver]
+reason = "no smoke test exists for the zig FFI, and the scaffold does not compile (see unit)"
+until = "2026-12-31"
+[categories.p2p.zig.waiver]
+reason = "no inter-component test exists for the zig FFI; it is not yet wired to the server (see unit)"
+until = "2026-12-31"
+
+# ── languages the umbrella cannot run, or that have nothing to run ───────────
+[languages.ignore.node]
+reason = "clients/vscode/package.json is a VS Code extension client (compiled from extension.affine, no package-lock, no tests, no smoke or p2p scripts) and web/app.js is a static page; there is nothing for the umbrella to run and npm ci would fail without a lockfile"
+
+[languages.ignore.python]
+reason = "one file, clients/sublime/UniversalConnector.py, a Sublime Text plugin that imports the editor's own API and runs only inside Sublime; it has no tests"
+
+[languages.ignore.kotlin]
+reason = "one file, clients/jetbrains/UniversalConnector.kt, an IDE client with no build file (no gradle) and no tests; kotlin has no runner in release 0.1"
+
+[languages.ignore.lua]
+reason = "one file, clients/neovim/init.lua, an editor client snippet with no tests; lua has no runner in release 0.1"
+
+[languages.ignore.shell]
+reason = "setup.sh (platform bootstrap) and .githooks/validate-{a2ml,k9}.sh are checks run by the dogfood-gate workflow, not a test suite; none has tests of its own"
+
+# ── bench ─────────────────────────────────────────────────────────────────────
+# server/benches/lsp_bench.rs is a criterion suite of 17 benchmarks. Wall-clock
+# timing would be dominated by the release (LTO) compile, so the target reads the
+# criterion median for one benchmark, in nanoseconds, from the last output line.
+# Measured once locally at 3424 ns. First runs only: no history, so baselining.
+[bench.toml_parse]
+command = '''cd server && cargo bench --locked --bench lsp_bench -- toml_parse 2>/dev/null | awk '$1=="toml_parse" && $2=="time:" { v=$5; u=$6; m=1; if (u=="µs"||u=="us") m=1000; else if (u=="ms") m=1000000; else if (u=="s") m=1000000000; printf "%.0f\n", v*m }' '''
+metric = "median_ns"
+baselining = true
