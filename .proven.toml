@@ -74,9 +74,10 @@ reason = "setup.sh (platform bootstrap) and .githooks/validate-{a2ml,k9}.sh are 
 # ── bench ─────────────────────────────────────────────────────────────────────
 # server/benches/lsp_bench.rs is a criterion suite of 17 benchmarks. Wall-clock
 # timing would be dominated by the release (LTO) compile, so the target reads the
-# criterion median for one benchmark, in nanoseconds, from the last output line.
+# criterion point estimate (the centre of the time: interval, not the median) for one
+# benchmark, in nanoseconds, from the last output line.
 # Measured once locally at 3424 ns. First runs only: no history, so baselining.
 [bench.toml_parse]
 command = '''cd server && cargo bench --locked --bench lsp_bench -- toml_parse 2>/dev/null | awk '$1=="toml_parse" && $2=="time:" { v=$5; u=$6; m=1; if (u=="µs"||u=="us") m=1000; else if (u=="ms") m=1000000; else if (u=="s") m=1000000000; printf "%.0f\n", v*m }' '''
-metric = "median_ns"
+metric = "estimate_ns"
 baselining = true
