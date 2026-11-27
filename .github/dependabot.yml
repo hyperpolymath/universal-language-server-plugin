@@ -1,5 +1,11 @@
 # SPDX-License-Identifier: MPL-2.0
 version: 2
+
+multi-ecosystem-groups:
+  js-locks:
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
 updates:
   - package-ecosystem: "cargo"
     directory: "/"
@@ -47,13 +53,14 @@ updates:
           - "*"
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
-    groups:
-      all-dependencies:
-        patterns:
-          - "*"
+    multi-ecosystem-group: "js-locks"
+    patterns: ["*"]
+
+  # Bun (bun.lock): in the js-locks group with npm, so one PR moves package.json and bun.lock together
+  - package-ecosystem: "bun"
+    directory: "/"
+    multi-ecosystem-group: "js-locks"
+    patterns: ["*"]
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
